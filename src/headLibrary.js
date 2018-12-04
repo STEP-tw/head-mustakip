@@ -5,11 +5,12 @@ const getHeadLines = function(string,numberOfLines) {
 
 const extractArgs = function(argsList) {
   argsList = argsList.slice(0,argsList.length);
-  let file = argsList[3];
+  let file = argsList[3] || argsList[2];
   let numberOfLines = argsList[2].split("n").reverse()[0];
-  numberOfLines = +numberOfLines.split("-").reverse()[0]
+  numberOfLines = +numberOfLines.split("-").reverse()[0] || 10;
   return {file,numberOfLines};
 }
+
 module.exports = { getHeadLines,
   extractArgs
 };

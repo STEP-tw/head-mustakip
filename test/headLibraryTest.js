@@ -5,15 +5,21 @@ const {getHeadLines,extractArgs} = require("../src/headLibrary.js");
 
 describe('Test for headLibrary.js', function () {
   describe('Test extractArgs', function () {
-    it('should return object consisting numberOfLines and file name', function () {
+    it('should return object consisting numberOfLines and file name for head type - n', function () {
       let argsList = ["node","head.js","-n5","file.js"];
       expectedOutput = {file : "file.js", numberOfLines : 5};
 
       deepEqual(extractArgs(argsList),expectedOutput);
     });
-    it('should return object consisting numberOfLines and file name', function () {
+    it('should return object consisting numberOfLines and file name when type is not given', function () {
       let argsList = ["node","head.js","-5","file.js"];
       expectedOutput = {file : "file.js", numberOfLines : 5};
+
+      deepEqual(extractArgs(argsList),expectedOutput);
+    });
+    it('should return numberOfLines as 10 if not provided in process.argv', function () {
+      let argsList = ["node","head.js","","file.js"];
+      expectedOutput = {file : "file.js", numberOfLines : 10};
 
       deepEqual(extractArgs(argsList),expectedOutput);
     });
