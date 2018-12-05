@@ -1,11 +1,11 @@
 const {identity,doesIncludeNumber} = require("./util.js");
 
 const validateType = function(list) {
-  if(!(list[0].startsWith("-n")) && !(list[0].startsWith("-c"))) {
+  if(doesIncludeNumber(list[0]) && list[0].startsWith("-")) {
     list.splice(0,0,"-n");
-    if(!doesIncludeNumber(list[1])) {
-      list.splice(0,1,"-n10");
-    }
+  }
+  if(!list[0].startsWith("-")) {
+    list.splice(0,0,"-n10");
   }
   return list;
 }
@@ -15,7 +15,7 @@ const getParameters = function(list) {
   if(list[0].includes("c")) {
     type = "c";
   };
-  let headType = type;
+  let headType = type;;
   let numberOfLines = list[0].split(type).reverse()[0];
   numberOfLines = +numberOfLines.split("-").reverse()[0];
   let files = list.slice(1,list.length);
@@ -30,7 +30,7 @@ const extractArgs = function(argsList) {
     list.splice(1,1);
     return getParameters(list);
   }
-    return getParameters(list);
+  return getParameters(list);
 }
 module.exports = { 
   extractArgs,

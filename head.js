@@ -1,11 +1,11 @@
 const {readFileSync} = require("fs");
-const {getHeadLines,callFunc} = require("./src/headLibrary.js");
+const {getHead,callFunc} = require("./src/headLibrary.js");
 const {extractArgs} = require("./src/parsinginput.js");
 
 const main = function() {
-  let {headType,numberOfLines,files}= extractArgs(process.argv);
-  let fileContents = callFunc(readFileSync,files[0],"UTF8");
-  console.log(getHeadLines(fileContents,numberOfLines).join("\n"));
+  let args= extractArgs(process.argv);
+  args.files = (args.files).map(file => callFunc(readFileSync,file,"UTF8"));
+  console.log(getHead(args).join("\n\n"));
 }
 
 main();
