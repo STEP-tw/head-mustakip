@@ -11,6 +11,11 @@ const extractArgs = function(argsList) {
   return {file,numberOfLines};
 }
 
+const callFunc = function(func,argument1,argument2) {
+  return func(argument1,argument2);
+}
+
 module.exports = { getHeadLines,
-  extractArgs
+  extractArgs,
+  callFunc
 };
