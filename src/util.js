@@ -7,7 +7,12 @@ const doesIncludeNumber = function(string) {
   return numbers.some(x => string.includes(x));
 }
 
+const getFancifiedText = function(text) {
+  return "==> "+text+" <==";
+}
+
 module.exports = { 
   identity,
-  doesIncludeNumber
+  doesIncludeNumber,
+  getFancifiedText
 };

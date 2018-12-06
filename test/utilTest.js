@@ -1,5 +1,5 @@
 const {deepEqual} = require("assert");
-const {identity,doesIncludeNumber} = require("../src/util.js");
+const {identity,doesIncludeNumber,getFancifiedText} = require("../src/util.js");
 
 describe('Test for util functions', function () {
   describe('Test identity function', function () {
@@ -24,6 +24,16 @@ describe('Test for util functions', function () {
     it('should return false for empty input string ', function () {
       deepEqual(doesIncludeNumber(""),false);
     });
+    describe('Test getFancifiedText function', function () {
+      it('should return text in fancified form like ==> text <== for input text', function () {
+        deepEqual(getFancifiedText("file"),"==> file <==");
+        deepEqual(getFancifiedText("STEP"),"==> STEP <==");
+      });
+      it('should return string of numbers in fancified form for input string of numbers', function () {
+        deepEqual(getFancifiedText("1"),"==> 1 <==");
+        deepEqual(getFancifiedText("456"),"==> 456 <==");
+      });
+    }); 
   }); 
 }); 
 
