@@ -30,14 +30,10 @@ describe('Test for headLibrary.js', function () {
       inputstring_1 += "This is second line\n";
       inputstring_1 += "This is third line\n";
 
-      let inputstring_2 = "This is fourth line\n";
-      inputstring_2 += "This is fifth line";
-
-      let args = { files : [inputstring_1,inputstring_2],
+      let args = { files : [inputstring_1],
         numberOfLines : 2,headType : "n"};
 
-      expectedOutput = ["This is first line\nThis is second line",
-        "This is fourth line\nThis is fifth line"];
+      expectedOutput = ["This is first line\nThis is second line"];
 
       deepEqual(getHead(getSameContent,args),expectedOutput);
     });

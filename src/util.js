@@ -8,13 +8,13 @@ const doesIncludeNumber = function(string) {
 }
 
 const getFancifiedText = function(text) {
-  return "==> "+text+" <==";
+  return "==> "+text+" <==\n";
 }
 
 const zip = function(list1,list2) {
   let zippedList = [];
   for(index in list1) {
-    zippedList[index] = [list1[index]].concat(list2[index]);
+    zippedList[index] = list1[index].concat(list2[index]);
   }
   return zippedList;
 }

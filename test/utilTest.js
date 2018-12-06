@@ -27,23 +27,23 @@ describe('Test for util functions', function () {
     });
     describe('Test getFancifiedText function', function () {
       it('should return text in fancified form like ==> text <== for input text', function () {
-        deepEqual(getFancifiedText("file"),"==> file <==");
-        deepEqual(getFancifiedText("STEP"),"==> STEP <==");
+        deepEqual(getFancifiedText("file"),"==> file <==\n");
+        deepEqual(getFancifiedText("STEP"),"==> STEP <==\n");
       });
       it('should return string of numbers in fancified form for input string of numbers', function () {
-        deepEqual(getFancifiedText("1"),"==> 1 <==");
-        deepEqual(getFancifiedText("456"),"==> 456 <==");
+        deepEqual(getFancifiedText("1"),"==> 1 <==\n");
+        deepEqual(getFancifiedText("456"),"==> 456 <==\n");
       });
       it('should return fancified form even if empty input string is provided', function () {
-        deepEqual(getFancifiedText(""),"==>  <==");
+        deepEqual(getFancifiedText(""),"==>  <==\n");
       });
     });
     describe('Test zip function', function () {
       it('should return an array for two input arrays with their respective elements concated', function () {
         let list1 = ["cake","mango"];
-        let list2 = [["chocolate cake","pineapple cake"],["raw mango","ripen mango"]];
-        let expectedOutput = [["cake","chocolate cake","pineapple cake"],
-          ["mango","raw mango","ripen mango"]];
+        let list2 = [["chocolate","pineapple"],["raw","ripen"]];
+        let expectedOutput = ["cakechocolate,pineapple",
+          "mangoraw,ripen"];
         deepEqual(zip(list1,list2),expectedOutput);
       }); 
     });

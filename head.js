@@ -1,5 +1,5 @@
 const {readFileSync} = require("fs");
-const {getHead,callFunc} = require("./src/headLibrary.js");
+const {getHead} = require("./src/headLibrary.js");
 const {extractArgs} = require("./src/parsingInput.js");
 
 const main = function() {
