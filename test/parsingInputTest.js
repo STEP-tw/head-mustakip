@@ -89,6 +89,11 @@ describe('Test for parsingInput.js', function () {
       let expectedOutput = ["-n","-5","file1.js"];
       deepEqual(validateType(argsList),expectedOutput);
     });
+    it('it should return type -n5 as first element when number of lines is provided with type', function () {
+      let argsList = ["-n5","file1.js"];
+      let expectedOutput = ["-n5","file1.js"];
+      deepEqual(validateType(argsList),expectedOutput);
+    });
   }); 
 
   describe('Test getParameters', function () {
