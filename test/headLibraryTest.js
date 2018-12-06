@@ -21,14 +21,16 @@ describe('Test for headLibrary.js', function () {
   });
 
   describe('Test getHead', function () {
-    it('should return array with two elements for two input files in args.files', function () {
-      const getSameContent = function(content) {
-        return content;
-      }
+    const getSameContent = function(content) {
+      return content;
+    }
 
+    it('should return a string of two lines for one input file in args.files', function () {
       let inputstring_1 = "This is first line\n";
       inputstring_1 += "This is second line\n";
       inputstring_1 += "This is third line\n";
+
+      inputstring_2 = "identification\nrealization\nclassification";
 
       let args = { files : [inputstring_1],
         numberOfLines : 2,headType : "n"};
@@ -36,6 +38,19 @@ describe('Test for headLibrary.js', function () {
       expectedOutput = "This is first line\nThis is second line";
 
       deepEqual(getHead(getSameContent,args),expectedOutput);
+    });
+    it('should return a string of two lines one of each file for two input files', function () {
+      let inputstring_1 = "This is first";
+
+      inputstring_2 = "identity";
+
+      let args = { files : [inputstring_1,inputstring_2],
+        numberOfLines : 1,headType : "n"};
+
+      expectedOutput = "==> This is first <==\nThis is first\n\n==> identity <==\nidentity";
+
+      deepEqual(getHead(getSameContent,args),expectedOutput);
+
     });
   }); 
 
