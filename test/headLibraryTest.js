@@ -1,7 +1,6 @@
 const {deepEqual} = require("assert");
 const {getHeadLines,getHeadChars,extractArgs} = require("../src/headLibrary.js");
-const {getHead,callFunc} = require("../src/headLibrary.js");
-const {validateType,getParameters} = require("../src/headLibrary.js");
+const {validateType,getParameters,getHead} = require("../src/headLibrary.js");
 
 describe('Test for headLibrary.js', function () {
 
@@ -23,6 +22,10 @@ describe('Test for headLibrary.js', function () {
 
   describe('Test getHead', function () {
     it('should return array with two elements for two input files in args.files', function () {
+      const getSameContent = function(content) {
+        return content;
+      }
+
       let inputstring_1 = "This is first line\n";
       inputstring_1 += "This is second line\n";
       inputstring_1 += "This is third line\n";
@@ -36,7 +39,7 @@ describe('Test for headLibrary.js', function () {
       expectedOutput = ["This is first line\nThis is second line",
         "This is fourth line\nThis is fifth line"];
 
-      deepEqual(getHead(args),expectedOutput);
+      deepEqual(getHead(getSameContent,args),expectedOutput);
     });
   }); 
 
@@ -63,19 +66,6 @@ describe('Test for headLibrary.js', function () {
       deepEqual(getHeadChars("",5),[]);
     });
   });
-
-  describe('Test callFunc function', function () {
-    it('should return addition of two numbers when add function is provided', function () {
-      const add = function(a,b) { return a+b;}
-      deepEqual(callFunc(add,2,3),5);
-      deepEqual(callFunc(add,10,3),13);
-    });
-    it('should return multiplication of two numbers when mul function is provided', function () {
-      const mul = function(a,b) { return a*b;}
-      deepEqual(callFunc(mul,2,3),6);
-      deepEqual(callFunc(mul,10,3),30);
-    });
-  }); 
 }); 
 
 

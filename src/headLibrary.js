@@ -8,22 +8,17 @@ const getHeadChars = function(string,numberOfChars) {
   return chars.slice(0,numberOfChars);
 }
 
-const getHead = function(args) {
+const getHead = function(reader,args) {
   let {headType,files,numberOfLines} = args;
+  files = files.map(x => reader(x,"UTF8"));
   let head = { "n" : {func : getHeadLines,delimiter : "\n"},
     "c" : {func : getHeadChars,delimiter : ""}};
   let delimiter = head[headType].delimiter;
   return files.map(file => head[headType].func(file,numberOfLines).join(delimiter));
 }
 
-
-const callFunc = function(func,argument1,argument2) {
-  return func(argument1,argument2);
-}
-
 module.exports = { 
   getHeadLines,
   getHeadChars,
-  getHead,
-  callFunc
+  getHead
 };
