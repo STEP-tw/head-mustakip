@@ -33,7 +33,7 @@ describe('Test for headLibrary.js', function () {
       let args = { files : [inputstring_1],
         numberOfLines : 2,headType : "n"};
 
-      expectedOutput = ["This is first line\nThis is second line"];
+      expectedOutput = "This is first line\nThis is second line";
 
       deepEqual(getHead(getSameContent,args),expectedOutput);
     });

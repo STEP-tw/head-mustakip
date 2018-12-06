@@ -18,10 +18,11 @@ const getHead = function(reader,args) {
   let delimiter = head[headType].delimiter;
   let headList = fileContents.map(file => head[headType].func(file,numberOfLines).join(delimiter));
   let fancifiedFileNames = files.map(x => getFancifiedText(x));
+  delimiter = delimiter+head.n.delimiter;
   if(headList.length > 1) {
     headList = zip(fancifiedFileNames,headList);
   }
-  return headList;
+  return headList.join(delimiter);
 }
 
 module.exports = { 
