@@ -2,7 +2,9 @@ const {identity,doesIncludeNumber} = require("./util.js");
 
 const validateType = function(list) {
   if(doesIncludeNumber(list[0]) && list[0].startsWith("-")) {
-    list.unshift("-n");
+    if(!list[0].startsWith("-n")){
+      list.unshift("-n");
+    }
   }
   if(!list[0].startsWith("-")) {
     list.unshift("-n10");
