@@ -33,6 +33,9 @@ describe('Test for util functions', function () {
         deepEqual(getFancifiedText("1"),"==> 1 <==");
         deepEqual(getFancifiedText("456"),"==> 456 <==");
       });
+      it('should return fancified form even if empty input string is provided', function () {
+        deepEqual(getFancifiedText(""),"==>  <==");
+      });
     }); 
   }); 
 }); 
