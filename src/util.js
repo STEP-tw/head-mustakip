@@ -11,8 +11,17 @@ const getFancifiedText = function(text) {
   return "==> "+text+" <==";
 }
 
+const zip = function(list1,list2) {
+  let zippedList = [];
+  for(index in list1) {
+    zippedList[index] = [list1[index]].concat(list2[index]);
+  }
+  return zippedList;
+}
+
 module.exports = { 
   identity,
   doesIncludeNumber,
-  getFancifiedText
+  getFancifiedText,
+  zip
 };

@@ -1,5 +1,6 @@
 const {deepEqual} = require("assert");
-const {identity,doesIncludeNumber,getFancifiedText} = require("../src/util.js");
+const {identity,doesIncludeNumber,} = require("../src/util.js");
+const {getFancifiedText,zip} = require("../src/util.js");
 
 describe('Test for util functions', function () {
   describe('Test identity function', function () {
@@ -36,7 +37,15 @@ describe('Test for util functions', function () {
       it('should return fancified form even if empty input string is provided', function () {
         deepEqual(getFancifiedText(""),"==>  <==");
       });
-    }); 
+    });
+    describe('Test zip function', function () {
+      it('should return an array for two input arrays with their respective elements concated', function () {
+        let list1 = ["cake","mango"];
+        let list2 = [["chocolate cake","pineapple cake"],["raw mango","ripen mango"]];
+        let expectedOutput = [["cake","chocolate cake","pineapple cake"],
+          ["mango","raw mango","ripen mango"]];
+        deepEqual(zip(list1,list2),expectedOutput);
+      }); 
+    });
   }); 
 }); 
-
