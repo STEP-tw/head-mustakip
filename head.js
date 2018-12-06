@@ -1,6 +1,6 @@
 const {readFileSync} = require("fs");
 const {getHead,callFunc} = require("./src/headLibrary.js");
-const {extractArgs} = require("./src/parsinginput.js");
+const {extractArgs} = require("./src/parsingInput.js");
 
 const main = function() {
   let args= extractArgs(process.argv);
