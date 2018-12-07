@@ -10,15 +10,16 @@ const extractArgs = function(argsList) {
   let numberOfLines = 10;
   let files = argsList;
   if(doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-")) {
-    numberOfLines = argsList[0].split(type).reverse()[0];
-    numberOfLines = +numberOfLines.split("-").reverse()[0];
+    numberOfLines = argsList[0].match(/\d+/)[0]; 
+    files = argsList.slice(1);
+  }
+  if(doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-"+headType)) {
+    numberOfLines = argsList[0].match(/-*\d+/)[0]; 
     files = argsList.slice(1);
   }
   if(!doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-")) {
     numberOfLines = argsList[0].split("").slice(2).join("");
-    if(isFinite(argsList[1])) {
-      numberOfLines = argsList[1];
-    }
+    numberOfLines = argsList[1];
     files = argsList.slice(2);
   }
   return {headType,numberOfLines,files} 
