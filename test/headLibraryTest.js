@@ -52,6 +52,19 @@ describe('Test for headLibrary.js', function () {
       deepEqual(getHead(getSameContent,args),expectedOutput);
 
     });
+    it('should return a error message if the input count is not valid', function () {
+      let inputstring_1 = "This is first";
+
+      inputstring_2 = "identity";
+
+      let args = { files : [inputstring_1,inputstring_2],
+        numberOfLines : 0,headType : "n"};
+
+      expectedOutput = "head: illegal line count -- 0";
+
+      deepEqual(getHead(getSameContent,args),expectedOutput);
+
+    });
   }); 
 
   describe("Test getHeadChars function",function() {
