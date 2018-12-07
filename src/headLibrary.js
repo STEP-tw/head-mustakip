@@ -13,14 +13,14 @@ const getHeadChars = function(string,numberOfChars) {
 const getHead = function(reader,args) {
   let {headType,files,numberOfLines} = args;
   fileContents = files.map(x => reader(x,"UTF8"));
-  let head = { "n" : {func : getHeadLines,delimiter : "\n"},
-    "c" : {func : getHeadChars,delimiter : ""}};
+  let head = { "n" : {func : getHeadLines,delimiter : "\n",countType : "line"},
+    "c" : {func : getHeadChars,delimiter : "",countType : "byte"}};
   let delimiter = head[headType].delimiter;
   let headList = fileContents.map(file => head[headType].func(file,numberOfLines).join(delimiter));
   let fancifiedFileNames = files.map(x => getFancifiedText(x));
   delimiter = delimiter+head.n.delimiter;
   if(headList.every(x => x == "")) {
-    return "head: illegal line count -- "+numberOfLines;
+    return "head: illegal "+head[headType].countType+" count -- "+numberOfLines;
   }
   if(headList.length > 1) {
     headList = zip(fancifiedFileNames,headList);
