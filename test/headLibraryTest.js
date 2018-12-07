@@ -46,7 +46,8 @@ describe("Test for headLibrary.js", function() {
       };
       let expectedOutput = {
         isValid: false,
-        error: "head: illegal option -- r\nusage: head [-n lines | -c bytes] [file ...]"
+        error:
+          "head: illegal option -- r\nusage: head [-n lines | -c bytes] [file ...]"
       };
 
       deepEqual(findError(args), expectedOutput);
