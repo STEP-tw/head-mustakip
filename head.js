@@ -1,13 +1,10 @@
-const {readFileSync} = require("fs");
-const {getHead} = require("./src/headLibrary.js");
-const {extractArgs} = require("./src/parsingInput.js");
+const { readFileSync } = require('fs');
+const { getHead } = require('./src/headLibrary.js');
+const { extractArgs } = require('./src/parsingInput.js');
 
 const main = function() {
-  let args= extractArgs(process.argv);
-  console.log(getHead(readFileSync,args));
-}
+  let args = extractArgs(process.argv);
+  console.log(getHead(readFileSync, args));
+};
 
 main();
-  
-
-
