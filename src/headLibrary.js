@@ -19,7 +19,7 @@ const getHead = function(reader,args) {
   let headList = fileContents.map(file => head[headType].func(file,numberOfLines).join(delimiter));
   let fancifiedFileNames = files.map(x => getFancifiedText(x));
   delimiter = delimiter+head.n.delimiter;
-  if(headList == "") {
+  if(headList.every(x => x == "")) {
     return "head: illegal line count -- "+numberOfLines;
   }
   if(headList.length > 1) {
