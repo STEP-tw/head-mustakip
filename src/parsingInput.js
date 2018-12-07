@@ -15,7 +15,10 @@ const extractArgs = function(argsList) {
     files = argsList.slice(1);
   }
   if(!doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-")) {
-    numberOfLines = argsList[1];
+    numberOfLines = argsList[0].split("").slice(2).join("");
+    if(isFinite(argsList[1])) {
+      numberOfLines = argsList[1];
+    }
     files = argsList.slice(2);
   }
   return {headType,numberOfLines,files} 
