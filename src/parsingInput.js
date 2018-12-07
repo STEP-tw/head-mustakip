@@ -19,7 +19,9 @@ const extractArgs = function(argsList) {
   }
   if(!doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-")) {
     numberOfLines = argsList[0].split("").slice(2).join("");
-    numberOfLines = argsList[1];
+    if(numberOfLines == ""){
+      numberOfLines = argsList[1];
+    }
     files = argsList.slice(2);
   }
   return {headType,numberOfLines,files} 
