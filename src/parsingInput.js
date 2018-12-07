@@ -3,7 +3,7 @@ const { identity, doesIncludeNumber } = require("./util.js");
 const extractArgs = function(argsList) {
   argsList = argsList.slice(2);
   let type = "n";
-  if (argsList[0].includes("-c")) {
+  if (argsList[0].startsWith("-c")) {
     type = "c";
   }
   let headType = type;
