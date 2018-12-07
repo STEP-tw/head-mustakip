@@ -33,9 +33,13 @@ const findError = function(args) {
   return { isValid, error };
 };
 
-const getHead = function(reader, args) {
+const getHead = function(reader, doesFileExist, args) {
   let { headType, files, numberOfLines } = args;
-  fileContents = files.map(x => reader(x, "UTF8"));
+  fileContents = files.map(x =>
+    doesFileExist(x)
+      ? reader(x, "UTF8")
+      : "head: " + x + ": No such file or directory"
+  );
   let head = {
     n: { func: getHeadLines, delimiter: "\n" },
     c: { func: getHeadChars, delimiter: "" }
@@ -48,7 +52,7 @@ const getHead = function(reader, args) {
   let headList = fileContents.map(file =>
     head[headType].func(file, numberOfLines).join(delimiter)
   );
-  let fileHeaders = files.map(getHeader);
+  let fileHeaders = files.map(x => (doesFileExist(x) ? getHeader(x) : ""));
   delimiter = delimiter + head.n.delimiter;
   if (headList.length > 1) {
     headList = zip(fileHeaders, headList);
