@@ -38,6 +38,20 @@ describe("Test for headLibrary.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
 
+    it("should return an object with isValid false and error for invalid headType", function() {
+      let args = {
+        headType: "r",
+        numberOfLines: 5,
+        files: ["file1"]
+      };
+      let expectedOutput = {
+        isValid: false,
+        error: "head: illegal option -- r\nusage: head [-n lines | -c bytes] [file ...]"
+      };
+
+      deepEqual(findError(args), expectedOutput);
+    });
+
     it("should return an object with isValid false and error for -5 as numberOfLines ", function() {
       let args = {
         headType: "n",

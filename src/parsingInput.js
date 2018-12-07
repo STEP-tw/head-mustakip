@@ -2,9 +2,12 @@ const { identity, doesIncludeNumber } = require("./util.js");
 
 const extractArgs = function(argsList) {
   argsList = argsList.slice(2);
-  let type = "n";
-  if (argsList[0].startsWith("-c")) {
-    type = "c";
+  let type = "n"; 
+  if(argsList[0].startsWith("-")) {
+    type = argsList[0].match(/-\w/)[0].substring(1,2);
+  }
+  if (isFinite(type)) {
+    type = "n";
   }
   let headType = type;
   let numberOfLines = 10;
