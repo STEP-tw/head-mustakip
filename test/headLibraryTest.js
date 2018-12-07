@@ -7,7 +7,6 @@ const {
 } = require("../src/headLibrary.js");
 
 describe("Test for headLibrary.js", function() {
-
   describe("Test getHeadLines function", function() {
     it("should return array of n number of lines for given input content", function() {
       let inputstring = "This is first line\n";
@@ -24,58 +23,58 @@ describe("Test for headLibrary.js", function() {
     });
   });
 
-  describe('Test findError function', function () {
-    it('should return an object with isValid true and error none for valid input  ', function () {
+  describe("Test findError function", function() {
+    it("should return an object with isValid true and error none for valid input  ", function() {
       let args = {
-        headType : "n",
-        numberOfLines : 5,
-        files : ["file1"]
+        headType: "n",
+        numberOfLines: 5,
+        files: ["file1"]
       };
       let expectedOutput = {
-        isValid : true,
-        error : "none"
+        isValid: true,
+        error: "none"
       };
 
-      deepEqual(findError(args),expectedOutput);
+      deepEqual(findError(args), expectedOutput);
     });
 
-    it('should return an object with isValid false and error for -5 as numberOfLines ', function () {
+    it("should return an object with isValid false and error for -5 as numberOfLines ", function() {
       let args = {
-        headType : "n",
-        numberOfLines : "-5",
-        files : ["file1"]
+        headType: "n",
+        numberOfLines: "-5",
+        files: ["file1"]
       };
       let expectedOutput = {
-        isValid : false,
-        error : "head: illegal line count -- -5" 
+        isValid: false,
+        error: "head: illegal line count -- -5"
       };
 
-      deepEqual(findError(args),expectedOutput);
+      deepEqual(findError(args), expectedOutput);
     });
 
-    it('should return an object with isValid false and error for file name as numberOfLines ', function () {
+    it("should return an object with isValid false and error for file name as numberOfLines ", function() {
       let args = {
-        headType : "n",
-        numberOfLines : "file1",
-        files : []
+        headType: "n",
+        numberOfLines: "file1",
+        files: []
       };
       let expectedOutput = {
-        isValid : false,
-        error : "head: illegal line count -- file1" 
+        isValid: false,
+        error: "head: illegal line count -- file1"
       };
 
-      deepEqual(findError(args),expectedOutput);
+      deepEqual(findError(args), expectedOutput);
     });
-  }); 
+  });
 
   describe("Test getHead", function() {
     const getSameContent = function(content) {
       return content;
     };
-    
-    const isFilePresent = function(filename) {
-      return true;
-    }
+
+    const isFilePresent = function(state, fileName) {
+      return state;
+    };
 
     it("should return a string of two lines for one input file in args.files", function() {
       let inputstring_1 = "This is first line\n";
@@ -86,7 +85,10 @@ describe("Test for headLibrary.js", function() {
       let args = { files: [inputstring_1], numberOfLines: 2, headType: "n" };
       expectedOutput = "This is first line\nThis is second line";
 
-      deepEqual(getHead(getSameContent,isFilePresent, args), expectedOutput);
+      deepEqual(
+        getHead(getSameContent, isFilePresent.bind(null, true), args),
+        expectedOutput
+      );
     });
 
     it("should return a string of two lines one of each file for two input files", function() {
@@ -101,7 +103,10 @@ describe("Test for headLibrary.js", function() {
       expectedOutput =
         "==> This is first <==\nThis is first\n\n==> identity <==\nidentity";
 
-      deepEqual(getHead(getSameContent,isFilePresent,args), expectedOutput);
+      deepEqual(
+        getHead(getSameContent, isFilePresent.bind(null, true), args),
+        expectedOutput
+      );
     });
 
     it("should return a error message if the input count is not valid", function() {
@@ -115,7 +120,10 @@ describe("Test for headLibrary.js", function() {
       };
       expectedOutput = "head: illegal line count -- 0";
 
-      deepEqual(getHead(getSameContent,isFilePresent,args), expectedOutput);
+      deepEqual(
+        getHead(getSameContent, isFilePresent.bind(null, true), args),
+        expectedOutput
+      );
     });
 
     it("should return a error message if the input count is not valid", function() {
@@ -129,7 +137,10 @@ describe("Test for headLibrary.js", function() {
       };
       expectedOutput = "head: illegal line count -- -0";
 
-      deepEqual(getHead(getSameContent,isFilePresent,args), expectedOutput);
+      deepEqual(
+        getHead(getSameContent, isFilePresent.bind(null, true), args),
+        expectedOutput
+      );
     });
 
     it("should return a error message if the input count is not valid", function() {
@@ -139,7 +150,27 @@ describe("Test for headLibrary.js", function() {
       let args = { files: [], numberOfLines: "identity", headType: "n" };
       expectedOutput = "head: illegal line count -- identity";
 
-      deepEqual(getHead(getSameContent,isFilePresent,args), expectedOutput);
+      deepEqual(
+        getHead(getSameContent, isFilePresent.bind(null, true), args),
+        expectedOutput
+      );
+    });
+
+    it("should return a error message if the input file name is invalid", function() {
+      let inputstring_1 = "This is first";
+      let inputstring_2 = "identity";
+
+      let args = {
+        files: ["file"],
+        numberOfLines: "5",
+        headType: "n"
+      };
+      expectedOutput = "head: file: No such file or directory";
+
+      deepEqual(
+        getHead(getSameContent, isFilePresent.bind(null, false), args),
+        expectedOutput
+      );
     });
   });
 
