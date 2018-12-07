@@ -2,15 +2,12 @@ const { deepEqual } = require("assert");
 const {
   getHeadLines,
   getHeadChars,
-  extractArgs
-} = require("../src/headLibrary.js");
-const {
-  validateType,
-  getParameters,
+  findError,
   getHead
 } = require("../src/headLibrary.js");
 
 describe("Test for headLibrary.js", function() {
+
   describe("Test getHeadLines function", function() {
     it("should return array of n number of lines for given input content", function() {
       let inputstring = "This is first line\n";
@@ -26,6 +23,50 @@ describe("Test for headLibrary.js", function() {
       deepEqual(getHeadLines(inputstring, 2), expectedOutput_2);
     });
   });
+
+  describe('Test findError function', function () {
+    it('should return an object with isValid true and error none for valid input  ', function () {
+      let args = {
+        headType : "n",
+        numberOfLines : 5,
+        files : ["file1"]
+      };
+      let expectedOutput = {
+        isValid : true,
+        error : "none"
+      };
+
+      deepEqual(findError(args),expectedOutput);
+    });
+
+    it('should return an object with isValid false and error for -5 as numberOfLines ', function () {
+      let args = {
+        headType : "n",
+        numberOfLines : "-5",
+        files : ["file1"]
+      };
+      let expectedOutput = {
+        isValid : false,
+        error : "head: illegal line count -- -5" 
+      };
+
+      deepEqual(findError(args),expectedOutput);
+    });
+
+    it('should return an object with isValid false and error for file name as numberOfLines ', function () {
+      let args = {
+        headType : "n",
+        numberOfLines : "file1",
+        files : []
+      };
+      let expectedOutput = {
+        isValid : false,
+        error : "head: illegal line count -- file1" 
+      };
+
+      deepEqual(findError(args),expectedOutput);
+    });
+  }); 
 
   describe("Test getHead", function() {
     const getSameContent = function(content) {
@@ -161,6 +202,7 @@ describe("Test for headLibrary.js", function() {
       deepEqual(getHeadChars(inputstring, 20), expectedOutput_20);
       deepEqual(getHeadChars(inputstring, 25), expectedOutput_25);
     });
+
     it("should return empty array for empty input string", function() {
       deepEqual(getHeadChars("", 1), []);
       deepEqual(getHeadChars("", 5), []);

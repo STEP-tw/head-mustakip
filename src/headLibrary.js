@@ -59,5 +59,6 @@ const getHead = function(reader, args) {
 module.exports = {
   getHeadLines,
   getHeadChars,
+  findError,
   getHead
 };
