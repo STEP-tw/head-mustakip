@@ -48,10 +48,10 @@ const getHead = function(reader, args) {
   let headList = fileContents.map(file =>
     head[headType].func(file, numberOfLines).join(delimiter)
   );
-  let fancifiedFileNames = files.map(getHeader);
+  let fileHeaders = files.map(getHeader);
   delimiter = delimiter + head.n.delimiter;
   if (headList.length > 1) {
-    headList = zip(fancifiedFileNames, headList);
+    headList = zip(fileHeaders, headList);
   }
   return headList.join(delimiter);
 };
