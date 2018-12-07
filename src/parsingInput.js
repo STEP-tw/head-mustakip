@@ -18,15 +18,12 @@ const extractArgs = function(argsList) {
     doesIncludeNumber(argsList[0]) &&
     argsList[0].startsWith("-" + headType)
   ) {
-    numberOfLines = argsList[0].match(/-*\d+/)[0];
+    numberOfLines = argsList[0].match(/-*\d+\w*/)[0];
     files = argsList.slice(1);
   }
 
   if (!doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-")) {
-    numberOfLines = argsList[0]
-      .split("")
-      .slice(2)
-      .join("");
+    numberOfLines = argsList[0].substring(2);
     if (numberOfLines == "") {
       numberOfLines = argsList[1];
     }
