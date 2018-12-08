@@ -3,96 +3,96 @@ const { extractArgs } = require("../src/parsingInput.js");
 
 describe("Test for parsingInput.js", function() {
   describe("Test extractArgs", function() {
-    it("should return headType n and count 10 when not provided in input", function() {
+    it("should return option n and count 10 when not provided in input", function() {
       let argsList = ["node", "./head.js", "file1"];
-      expectedOutput = { headType: "n", files: ["file1"], count: 10 };
+      expectedOutput = { option: "n", files: ["file1"], count: 10 };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it("should return headType n and count 5 for -n5 as input", function() {
+    it("should return option n and count 5 for -n5 as input", function() {
       let argsList = ["node", "./head.js", "-n5", "file1"];
-      expectedOutput = { headType: "n", files: ["file1"], count: 5 };
+      expectedOutput = { option: "n", files: ["file1"], count: 5 };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it('should return headType n and count 5 for "-n" and "5" as input', function() {
+    it('should return option n and count 5 for "-n" and "5" as input', function() {
       let argsList = ["node", "./head.js", "-n", "5", "file"];
-      expectedOutput = { headType: "n", files: ["file"], count: 5 };
+      expectedOutput = { option: "n", files: ["file"], count: 5 };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it("should return headType n and count 5 for -5 as input", function() {
+    it("should return option n and count 5 for -5 as input", function() {
       let argsList = ["node", "./head.js", "-5", "file"];
-      expectedOutput = { headType: "n", files: ["file"], count: 5 };
+      expectedOutput = { option: "n", files: ["file"], count: 5 };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it("should return headType n and count 10 when not provided in input", function() {
+    it("should return option n and count 10 when not provided in input", function() {
       let argsList = ["node", "head.js", "file1", "file2"];
       expectedOutput = {
-        headType: "n",
+        option: "n",
         files: ["file1", "file2"],
         count: 10
       };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it('should return headType n and count 5 for "-n" and "5" as input(multiple files)', function() {
+    it('should return option n and count 5 for "-n" and "5" as input(multiple files)', function() {
       let argsList = ["node", "head.js", "-n", "5", "file1", "file2"];
       expectedOutput = {
-        headType: "n",
+        option: "n",
         files: ["file1", "file2"],
         count: 5
       };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it("should return headType n and count 5 for -n5 as input(multiple files)", function() {
+    it("should return option n and count 5 for -n5 as input(multiple files)", function() {
       let argsList = ["node", "head.js", "-n5", "file1", "file2"];
       expectedOutput = {
-        headType: "n",
+        option: "n",
         files: ["file1", "file2"],
         count: 5
       };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it("should return headType n and count 5 for -5 as input(multiple files)", function() {
+    it("should return option n and count 5 for -5 as input(multiple files)", function() {
       let argsList = ["node", "head.js", "-5", "file1", "file2"];
       expectedOutput = {
-        headType: "n",
+        option: "n",
         files: ["file1", "file2"],
         count: 5
       };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it("should return headType c and count 5 for -c5 as input", function() {
+    it("should return option c and count 5 for -c5 as input", function() {
       let argsList = ["node", "head.js", "-c5", "file1"];
-      expectedOutput = { headType: "c", files: ["file1"], count: 5 };
+      expectedOutput = { option: "c", files: ["file1"], count: 5 };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it('should return headType c and count 5 for "-c" and "5" as input', function() {
+    it('should return option c and count 5 for "-c" and "5" as input', function() {
       let argsList = ["node", "head.js", "-c", "5", "file1"];
-      expectedOutput = { headType: "c", files: ["file1"], count: 5 };
+      expectedOutput = { option: "c", files: ["file1"], count: 5 };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it("should return headType c and count 5 for -c5 as input(multiple files)", function() {
+    it("should return option c and count 5 for -c5 as input(multiple files)", function() {
       let argsList = ["node", "head.js", "-c5", "file1", "file2"];
       expectedOutput = {
-        headType: "c",
+        option: "c",
         files: ["file1", "file2"],
         count: 5
       };
 
       deepEqual(extractArgs(argsList), expectedOutput);
     });
-    it('should return headType c and count 5 for "-c" and "5" as input(multiple files)', function() {
+    it('should return option c and count 5 for "-c" and "5" as input(multiple files)', function() {
       let argsList = ["node", "head.js", "-c", "5", "file1", "file2"];
       expectedOutput = {
-        headType: "c",
+        option: "c",
         files: ["file1", "file2"],
         count: 5
       };

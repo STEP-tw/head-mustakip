@@ -44,7 +44,7 @@ describe("Test for headLibrary.js", function() {
   describe("Test findError function", function() {
     it("should return an object with isValid true and error none for valid input  ", function() {
       let args = {
-        headType: "n",
+        option: "n",
         count: 5,
         files: ["file1"]
       };
@@ -56,9 +56,9 @@ describe("Test for headLibrary.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
 
-    it("should return an object with isValid false and error for invalid headType", function() {
+    it("should return an object with isValid false and error for invalid option", function() {
       let args = {
-        headType: "r",
+        option: "r",
         count: 5,
         files: ["file1"]
       };
@@ -73,7 +73,7 @@ describe("Test for headLibrary.js", function() {
 
     it("should return an object with isValid false and error for -5 as count ", function() {
       let args = {
-        headType: "n",
+        option: "n",
         count: "-5",
         files: ["file1"]
       };
@@ -87,7 +87,7 @@ describe("Test for headLibrary.js", function() {
 
     it("should return an object with isValid false and error for file name as count ", function() {
       let args = {
-        headType: "n",
+        option: "n",
         count: "file1",
         files: []
       };
@@ -115,7 +115,7 @@ describe("Test for headLibrary.js", function() {
       inputstring_1 += "This is third line\n";
       let inputstring_2 = "identification\nrealization\nclassification";
 
-      let args = { files: [inputstring_1], count: 2, headType: "n" };
+      let args = { files: [inputstring_1], count: 2, option: "n" };
       expectedOutput = "This is first line\nThis is second line";
 
       deepEqual(
@@ -131,7 +131,7 @@ describe("Test for headLibrary.js", function() {
       let args = {
         files: [inputstring_1, inputstring_2],
         count: 1,
-        headType: "n"
+        option: "n"
       };
       expectedOutput =
         "==> This is first <==\nThis is first\n\n==> identity <==\nidentity";
@@ -149,7 +149,7 @@ describe("Test for headLibrary.js", function() {
       let args = {
         files: [inputstring_1, inputstring_2],
         count: "0",
-        headType: "n"
+        option: "n"
       };
       expectedOutput = "head: illegal line count -- 0";
 
@@ -166,7 +166,7 @@ describe("Test for headLibrary.js", function() {
       let args = {
         files: [inputstring_1, inputstring_2],
         count: "-0",
-        headType: "n"
+        option: "n"
       };
       expectedOutput = "head: illegal line count -- -0";
 
@@ -180,7 +180,7 @@ describe("Test for headLibrary.js", function() {
       let inputstring_1 = "This is first";
       let inputstring_2 = "identity";
 
-      let args = { files: [], count: "identity", headType: "n" };
+      let args = { files: [], count: "identity", option: "n" };
       expectedOutput = "head: illegal line count -- identity";
 
       deepEqual(
@@ -196,7 +196,7 @@ describe("Test for headLibrary.js", function() {
       let args = {
         files: ["file"],
         count: "5",
-        headType: "n"
+        option: "n"
       };
       expectedOutput = "head: file: No such file or directory";
 

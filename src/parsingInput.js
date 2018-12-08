@@ -9,7 +9,7 @@ const extractArgs = function(argsList) {
   if (isFinite(type)) {
     type = "n";
   }
-  let headType = type;
+  let option = type;
   let count = 10;
   let files = argsList;
   if (doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-")) {
@@ -19,7 +19,7 @@ const extractArgs = function(argsList) {
 
   if (
     doesIncludeNumber(argsList[0]) &&
-    argsList[0].startsWith("-" + headType)
+    argsList[0].startsWith("-" + option)
   ) {
     count = argsList[0].match(/-*\d+\w*/)[0];
     files = argsList.slice(1);
@@ -32,7 +32,7 @@ const extractArgs = function(argsList) {
     }
     files = argsList.slice(2);
   }
-  return { headType, count, files };
+  return { option, count, files };
 };
 
 module.exports = { extractArgs };
