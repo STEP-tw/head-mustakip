@@ -10,6 +10,10 @@ const getHeadChars = function(string, numberOfChars) {
   return chars.slice(0, numberOfChars);
 };
 
+const isValidCount = function(count) {
+  return count > 0 && isFinite(count);
+}
+
 const findError = function(args) {
   let { headType, files, count } = args;
   let countType = {
@@ -24,13 +28,7 @@ const findError = function(args) {
     isValid = false;
     return { isValid, error };
   }
-  if (count <= 0) {
-    error =
-      "head: illegal " + countType[headType] + " count -- " + count;
-    isValid = false;
-    return { isValid, error };
-  }
-  if (!isFinite(count)) {
+  if (!isValidCount(count)) {
     error =
       "head: illegal " + countType[headType] + " count -- " + count;
     isValid = false;
