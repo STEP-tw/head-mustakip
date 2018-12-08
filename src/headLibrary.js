@@ -1,8 +1,8 @@
 const { getHeader, zip } = require("./util.js");
 
-const getHeadLines = function(string, numberOfLines) {
+const getHeadLines = function(string, count) {
   let lines = string.split("\n");
-  return lines.slice(0, numberOfLines);
+  return lines.slice(0, count);
 };
 
 const getHeadChars = function(string, numberOfChars) {
@@ -11,7 +11,7 @@ const getHeadChars = function(string, numberOfChars) {
 };
 
 const findError = function(args) {
-  let { headType, files, numberOfLines } = args;
+  let { headType, files, count } = args;
   let countType = {
     n: "line",
     c: "byte"
@@ -24,15 +24,15 @@ const findError = function(args) {
     isValid = false;
     return { isValid, error };
   }
-  if (numberOfLines <= 0) {
+  if (count <= 0) {
     error =
-      "head: illegal " + countType[headType] + " count -- " + numberOfLines;
+      "head: illegal " + countType[headType] + " count -- " + count;
     isValid = false;
     return { isValid, error };
   }
-  if (!isFinite(numberOfLines)) {
+  if (!isFinite(count)) {
     error =
-      "head: illegal " + countType[headType] + " count -- " + numberOfLines;
+      "head: illegal " + countType[headType] + " count -- " + count;
     isValid = false;
     return { isValid, error };
   }
@@ -40,7 +40,7 @@ const findError = function(args) {
 };
 
 const getHead = function(reader, doesFileExist, args) {
-  let { headType, files, numberOfLines } = args;
+  let { headType, files, count } = args;
   fileContents = files.map(x =>
     doesFileExist(x)
       ? reader(x, "UTF8")
@@ -56,7 +56,7 @@ const getHead = function(reader, doesFileExist, args) {
   }
   let delimiter = head[headType].delimiter;
   let headList = fileContents.map(file =>
-    head[headType].func(file, numberOfLines).join(delimiter)
+    head[headType].func(file, count).join(delimiter)
   );
   let fileHeaders = files.map(x => (doesFileExist(x) ? getHeader(x) : ""));
   delimiter = delimiter + head.n.delimiter;

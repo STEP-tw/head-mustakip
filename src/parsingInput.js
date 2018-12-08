@@ -10,10 +10,10 @@ const extractArgs = function(argsList) {
     type = "n";
   }
   let headType = type;
-  let numberOfLines = 10;
+  let count = 10;
   let files = argsList;
   if (doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-")) {
-    numberOfLines = argsList[0].match(/\d+/)[0];
+    count = argsList[0].match(/\d+/)[0];
     files = argsList.slice(1);
   }
 
@@ -21,18 +21,18 @@ const extractArgs = function(argsList) {
     doesIncludeNumber(argsList[0]) &&
     argsList[0].startsWith("-" + headType)
   ) {
-    numberOfLines = argsList[0].match(/-*\d+\w*/)[0];
+    count = argsList[0].match(/-*\d+\w*/)[0];
     files = argsList.slice(1);
   }
 
   if (!doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-")) {
-    numberOfLines = argsList[0].substring(2);
-    if (numberOfLines == "") {
-      numberOfLines = argsList[1];
+    count = argsList[0].substring(2);
+    if (count == "") {
+      count = argsList[1];
     }
     files = argsList.slice(2);
   }
-  return { headType, numberOfLines, files };
+  return { headType, count, files };
 };
 
 module.exports = { extractArgs };

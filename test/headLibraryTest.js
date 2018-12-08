@@ -27,7 +27,7 @@ describe("Test for headLibrary.js", function() {
     it("should return an object with isValid true and error none for valid input  ", function() {
       let args = {
         headType: "n",
-        numberOfLines: 5,
+        count: 5,
         files: ["file1"]
       };
       let expectedOutput = {
@@ -41,7 +41,7 @@ describe("Test for headLibrary.js", function() {
     it("should return an object with isValid false and error for invalid headType", function() {
       let args = {
         headType: "r",
-        numberOfLines: 5,
+        count: 5,
         files: ["file1"]
       };
       let expectedOutput = {
@@ -53,10 +53,10 @@ describe("Test for headLibrary.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
 
-    it("should return an object with isValid false and error for -5 as numberOfLines ", function() {
+    it("should return an object with isValid false and error for -5 as count ", function() {
       let args = {
         headType: "n",
-        numberOfLines: "-5",
+        count: "-5",
         files: ["file1"]
       };
       let expectedOutput = {
@@ -67,10 +67,10 @@ describe("Test for headLibrary.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
 
-    it("should return an object with isValid false and error for file name as numberOfLines ", function() {
+    it("should return an object with isValid false and error for file name as count ", function() {
       let args = {
         headType: "n",
-        numberOfLines: "file1",
+        count: "file1",
         files: []
       };
       let expectedOutput = {
@@ -97,7 +97,7 @@ describe("Test for headLibrary.js", function() {
       inputstring_1 += "This is third line\n";
       let inputstring_2 = "identification\nrealization\nclassification";
 
-      let args = { files: [inputstring_1], numberOfLines: 2, headType: "n" };
+      let args = { files: [inputstring_1], count: 2, headType: "n" };
       expectedOutput = "This is first line\nThis is second line";
 
       deepEqual(
@@ -112,7 +112,7 @@ describe("Test for headLibrary.js", function() {
 
       let args = {
         files: [inputstring_1, inputstring_2],
-        numberOfLines: 1,
+        count: 1,
         headType: "n"
       };
       expectedOutput =
@@ -130,7 +130,7 @@ describe("Test for headLibrary.js", function() {
 
       let args = {
         files: [inputstring_1, inputstring_2],
-        numberOfLines: "0",
+        count: "0",
         headType: "n"
       };
       expectedOutput = "head: illegal line count -- 0";
@@ -147,7 +147,7 @@ describe("Test for headLibrary.js", function() {
 
       let args = {
         files: [inputstring_1, inputstring_2],
-        numberOfLines: "-0",
+        count: "-0",
         headType: "n"
       };
       expectedOutput = "head: illegal line count -- -0";
@@ -162,7 +162,7 @@ describe("Test for headLibrary.js", function() {
       let inputstring_1 = "This is first";
       let inputstring_2 = "identity";
 
-      let args = { files: [], numberOfLines: "identity", headType: "n" };
+      let args = { files: [], count: "identity", headType: "n" };
       expectedOutput = "head: illegal line count -- identity";
 
       deepEqual(
@@ -177,7 +177,7 @@ describe("Test for headLibrary.js", function() {
 
       let args = {
         files: ["file"],
-        numberOfLines: "5",
+        count: "5",
         headType: "n"
       };
       expectedOutput = "head: file: No such file or directory";
