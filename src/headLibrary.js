@@ -67,6 +67,7 @@ const getHead = function(reader, doesFileExist, args) {
 module.exports = {
   getHeadLines,
   getHeadChars,
+  isValidCount,
   findError,
   getHead
 };

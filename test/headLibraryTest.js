@@ -1,12 +1,30 @@
 const { deepEqual } = require("assert");
 const {
   getHeadLines,
+  isValidCount,
   getHeadChars,
   findError,
   getHead
 } = require("../src/headLibrary.js");
 
 describe("Test for headLibrary.js", function() {
+  describe('Test isValidCount function', function () {
+    it('should return true for input count as a nonzero positive integer', function () {
+      deepEqual(isValidCount(9),true);
+      deepEqual(isValidCount(1),true);
+      deepEqual(isValidCount(12),true);
+    });
+    it('should return false for input count zero or negative integer', function () {
+      deepEqual(isValidCount(-4),false);
+      deepEqual(isValidCount(0),false);
+      deepEqual(isValidCount(-1),false);
+    });
+    it('should return false for input count as any words string', function () {
+      deepEqual(isValidCount("obvious"),false);
+      deepEqual(isValidCount("iAm1"),false);
+      deepEqual(isValidCount("m"),false);
+    });
+  }); 
   describe("Test getHeadLines function", function() {
     it("should return array of n number of lines for given input content", function() {
       let inputstring = "This is first line\n";
