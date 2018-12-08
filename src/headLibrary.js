@@ -24,7 +24,7 @@ const findError = function(args) {
   let isValid = true;
   if (headType != "n" && headType != "c") {
     error =
-      "head: illegal option -- r\nusage: head [-n lines | -c bytes] [file ...]";
+      "head: illegal option -- "+headType+"\nusage: head [-n lines | -c bytes] [file ...]";
     isValid = false;
     return { isValid, error };
   }
