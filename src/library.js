@@ -1,27 +1,21 @@
 const { getHeader, zip } = require("./util.js");
 
 const getLines = function(type, string, count) {
-  if(count < 0) {
-    count = count - (count * 2);
-  }
   let lines = string.split("\n");
   let linesLength = lines.length;
   let operation = { 
     head : lines.slice(0, count),
-    tail : lines.slice(linesLength - (+count+1), linesLength-1)
+    tail : lines.slice(linesLength - count, linesLength)
   };
   return operation[type];
 };
 
 const getChars = function(type, string, count) {
-   if(count > 0 && type == "tail") {
-    count = count - (count * 2);
-  }
   let chars = string.split("");
   let charsLength = chars.length;
   let operation = { 
     head : chars.slice(0, count),
-    tail : chars.slice(charsLength - (+count+1), charsLength-1)
+    tail : chars.slice(charsLength - count, charsLength)
   };
   return operation[type];
 };

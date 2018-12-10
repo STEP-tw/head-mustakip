@@ -31,7 +31,7 @@ describe("Test for library.js", function() {
       inputstring += "This is second line\n";
       inputstring += "This is third line\n";
       inputstring += "This is fourth line\n";
-      inputstring += "This is fifth line\n";
+      inputstring += "This is fifth line";
 
       expectedOutput_1 = ["This is first line"];
       expectedOutput_2 = ["This is first line", "This is second line"];
@@ -44,7 +44,7 @@ describe("Test for library.js", function() {
       inputstring += "This is second line\n";
       inputstring += "This is third line\n";
       inputstring += "This is fourth line\n";
-      inputstring += "This is fifth line\n";
+      inputstring += "This is fifth line";
 
       expectedOutput_1 = ["This is fifth line"];
       expectedOutput_2 = ["This is fourth line", "This is fifth line"];
@@ -57,7 +57,7 @@ describe("Test for library.js", function() {
       inputstring += "This is second line\n";
       inputstring += "This is third line\n";
       inputstring += "This is fourth line\n";
-      inputstring += "This is fifth line\n";
+      inputstring += "This is fifth line";
 
       deepEqual(getLines("tail", inputstring, 0), []);
     });
