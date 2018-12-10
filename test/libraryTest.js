@@ -5,7 +5,7 @@ const {
   getHeadChars,
   findError,
   getHead
-} = require("../src/headLibrary.js");
+} = require("../src/library.js");
 
 describe("Test for headLibrary.js", function() {
   describe('Test isValidCount function', function () {
