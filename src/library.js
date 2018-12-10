@@ -57,7 +57,7 @@ const getHead = function(reader, doesFileExist, args) {
   fileContents = files.map(x =>
     doesFileExist(x)
       ? reader(x, "UTF8")
-      : "head: " + x + ": No such file or directory"
+      : type+": " + x + ": No such file or directory"
   );
   let operation = {
     n: { func: getLines, delimiter: "\n" },
