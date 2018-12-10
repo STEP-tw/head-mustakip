@@ -32,7 +32,6 @@ const isValidCount = function(count) {
 
 const findError = function(args) {
   let { type, option, files, count } = args;
-  
   let usage = {
     "head" : "usage: head [-n lines | -c bytes] [file ...]",
     "tail" : "usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
@@ -52,6 +51,12 @@ const findError = function(args) {
   if (!isValidCount(count) && type == "head") {
     error =
       "head: illegal " + countType[option] + " count -- " + count;
+  isValid = false;
+    return { isValid, error };
+  }
+  if(!isFinite(count)) {
+    error =
+      type+": illegal offset -- " + count;
     isValid = false;
     return { isValid, error };
   }

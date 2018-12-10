@@ -123,6 +123,21 @@ describe("Test for library.js", function() {
 
       deepEqual(findError(args), expectedOutput);
     });
+
+    it("should return an object with isValid false and error for file name as count ", function() {
+      let args = {
+        type : "tail",
+        option: "n",
+        count: "file1",
+        files: []
+      };
+      let expectedOutput = {
+        isValid: false,
+        error: "tail: illegal offset -- file1"
+      };
+
+      deepEqual(findError(args), expectedOutput);
+    });
   });
 
   describe("Test getHead", function() {
