@@ -96,6 +96,7 @@ describe("Test for library.js", function() {
 
     it("should return an object with isValid false and error for -5 as count ", function() {
       let args = {
+        type : "head",
         option: "n",
         count: "-5",
         files: ["file1"]
@@ -110,6 +111,7 @@ describe("Test for library.js", function() {
 
     it("should return an object with isValid false and error for file name as count ", function() {
       let args = {
+        type : "head",
         option: "n",
         count: "file1",
         files: []
@@ -189,6 +191,7 @@ describe("Test for library.js", function() {
       let inputstring_2 = "identity";
 
       let args = {
+        type : "head",
         files: [inputstring_1, inputstring_2],
         count: "-0",
         option: "n"
@@ -205,7 +208,7 @@ describe("Test for library.js", function() {
       let inputstring_1 = "This is first";
       let inputstring_2 = "identity";
 
-      let args = { files: [], count: "identity", option: "n" };
+      let args = { type : "head",files: [], count: "identity", option: "n" };
       expectedOutput = "head: illegal line count -- identity";
 
       deepEqual(

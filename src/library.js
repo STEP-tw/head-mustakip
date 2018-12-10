@@ -43,7 +43,7 @@ const findError = function(args) {
     isValid = false;
     return { isValid, error };
   }
-  if (!isValidCount(count)) {
+  if (!isValidCount(count) && type == "head") {
     error =
       "head: illegal " + countType[option] + " count -- " + count;
     isValid = false;
