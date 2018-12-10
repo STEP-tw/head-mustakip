@@ -7,7 +7,7 @@ const {
   getHead
 } = require("../src/library.js");
 
-describe("Test for headLibrary.js", function() {
+describe("Test for library.js", function() {
   describe('Test isValidCount function', function () {
     it('should return true for input count as a nonzero positive integer', function () {
       deepEqual(isValidCount(9),true);
@@ -26,18 +26,40 @@ describe("Test for headLibrary.js", function() {
     });
   }); 
   describe("Test getLines function", function() {
-    it("should return array of n number of lines for given input content", function() {
+    it("should return array of first n number of lines for given input content for head", function() {
       let inputstring = "This is first line\n";
       inputstring += "This is second line\n";
       inputstring += "This is third line\n";
       inputstring += "This is fourth line\n";
-      inputstring += "This is fifth line";
+      inputstring += "This is fifth line\n";
 
       expectedOutput_1 = ["This is first line"];
-      expectedOutput_2 = ["This is fourth line", "This is fifth line"];
+      expectedOutput_2 = ["This is first line", "This is second line"];
 
       deepEqual(getLines("head", inputstring, 1), expectedOutput_1);
+      deepEqual(getLines("head", inputstring, 2), expectedOutput_2);
+    });
+     it("should return array of last n number of lines for given input content for tail", function() {
+      let inputstring = "This is first line\n";
+      inputstring += "This is second line\n";
+      inputstring += "This is third line\n";
+      inputstring += "This is fourth line\n";
+      inputstring += "This is fifth line\n";
+
+      expectedOutput_1 = ["This is fifth line"];
+      expectedOutput_2 = ["This is fourth line", "This is fifth line"];
+
+      deepEqual(getLines("tail", inputstring, 1), expectedOutput_1);
       deepEqual(getLines("tail", inputstring, 2), expectedOutput_2);
+    });
+    it("should return empty array for given input count 0 for tail", function() {
+      let inputstring = "This is first line\n";
+      inputstring += "This is second line\n";
+      inputstring += "This is third line\n";
+      inputstring += "This is fourth line\n";
+      inputstring += "This is fifth line\n";
+
+      deepEqual(getLines("tail", inputstring, 0), []);
     });
   });
 
@@ -59,7 +81,7 @@ describe("Test for headLibrary.js", function() {
 
     it("should return an object with isValid false and error for invalid option", function() {
       let args = {
-        type : "head",
+        type : "tail",
         option: "r",
         count: 5,
         files: ["file1"]
@@ -67,7 +89,7 @@ describe("Test for headLibrary.js", function() {
       let expectedOutput = {
         isValid: false,
         error:
-          "head: illegal option -- r\nusage: head [-n lines | -c bytes] [file ...]"
+          "tail: illegal option -- r\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
       };
 
       deepEqual(findError(args), expectedOutput);
