@@ -25,7 +25,11 @@ const isValidCount = function(count) {
 }
 
 const findError = function(args) {
-  let { option, files, count } = args;
+  let { type, option, files, count } = args;
+  let usage = {
+    "head" : "usage: head [-n lines | -c bytes] [file ...]",
+    "tail" : "usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
+  }
   let countType = {
     n: "line",
     c: "byte"
@@ -34,13 +38,13 @@ const findError = function(args) {
   let isValid = true;
   if (option != "n" && option != "c") {
     error =
-      "head: illegal option -- "+option+"\nusage: head [-n lines | -c bytes] [file ...]";
+      type+": illegal option -- "+option+"\n"+usage[type];
     isValid = false;
     return { isValid, error };
   }
-  if (!isValidCount(count)) {
+  if (!isValidCount(count) && type == "head") {
     error =
-      "head: illegal " + countType[option] + " count -- " + count;
+      type+": illegal " + countType[option] + " count -- " + count;
     isValid = false;
     return { isValid, error };
   }
@@ -52,7 +56,7 @@ const getHead = function(reader, doesFileExist, args) {
   fileContents = files.map(x =>
     doesFileExist(x)
       ? reader(x, "UTF8")
-      : "head: " + x + ": No such file or directory"
+      : type+": " + x + ": No such file or directory"
   );
   let operation = {
     n: { func: getLines, delimiter: "\n" },

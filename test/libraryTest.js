@@ -44,6 +44,7 @@ describe("Test for headLibrary.js", function() {
   describe("Test findError function", function() {
     it("should return an object with isValid true and error none for valid input  ", function() {
       let args = {
+        type : "head",
         option: "n",
         count: 5,
         files: ["file1"]
@@ -58,6 +59,7 @@ describe("Test for headLibrary.js", function() {
 
     it("should return an object with isValid false and error for invalid option", function() {
       let args = {
+        type : "head",
         option: "r",
         count: 5,
         files: ["file1"]
@@ -73,6 +75,7 @@ describe("Test for headLibrary.js", function() {
 
     it("should return an object with isValid false and error for -5 as count ", function() {
       let args = {
+        type : "head",
         option: "n",
         count: "-5",
         files: ["file1"]
@@ -87,6 +90,7 @@ describe("Test for headLibrary.js", function() {
 
     it("should return an object with isValid false and error for file name as count ", function() {
       let args = {
+        type : "head",
         option: "n",
         count: "file1",
         files: []
@@ -166,6 +170,7 @@ describe("Test for headLibrary.js", function() {
       let inputstring_2 = "identity";
 
       let args = {
+        type : "head",
         files: [inputstring_1, inputstring_2],
         count: "-0",
         option: "n"
@@ -179,10 +184,8 @@ describe("Test for headLibrary.js", function() {
     });
 
     it("should return a error message if the input count is not valid", function() {
-      let inputstring_1 = "This is first";
-      let inputstring_2 = "identity";
 
-      let args = { files: [], count: "identity", option: "n" };
+      let args = { type : "head", files: [], count: "identity", option: "n" };
       expectedOutput = "head: illegal line count -- identity";
 
       deepEqual(
@@ -192,8 +195,6 @@ describe("Test for headLibrary.js", function() {
     });
 
     it("should return a error message if the input file name is invalid", function() {
-      let inputstring_1 = "This is first";
-      let inputstring_2 = "identity";
 
       let args = {
         type : "head",
