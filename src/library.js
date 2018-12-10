@@ -3,6 +3,9 @@ const { getHeader, zip } = require("./util.js");
 const getLines = function(type, string, count) {
   let lines = string.split("\n");
   let linesLength = lines.length;
+  if(count > linesLength) {
+    count = linesLength;
+  }
   let operation = { 
     head : lines.slice(0, count),
     tail : lines.slice(linesLength - count, linesLength)
@@ -13,6 +16,9 @@ const getLines = function(type, string, count) {
 const getChars = function(type, string, count) {
   let chars = string.split("");
   let charsLength = chars.length;
+  if(count > charsLength) {
+    count = charsLength;
+  }
   let operation = { 
     head : chars.slice(0, count),
     tail : chars.slice(charsLength - count, charsLength)
