@@ -1,15 +1,16 @@
 const { identity, doesIncludeNumber } = require("./util.js");
 
 const extractArgs = function(argsList) {
+  let length = argsList[1].length;
+  let type = argsList[1].slice(length-7, length-3);
   argsList = argsList.slice(2);
-  let type = "n"; 
+  let option = "n"; 
   if(argsList[0].startsWith("-")) {
-    type = argsList[0].match(/-\w/)[0].substring(1,2);
+    option = argsList[0].match(/-\w/)[0].substring(1,2);
   }
-  if (isFinite(type)) {
-    type = "n";
+  if (isFinite(option)) {
+    option = "n";
   }
-  let option = type;
   let count = 10;
   let files = argsList;
   if (doesIncludeNumber(argsList[0]) && argsList[0].startsWith("-")) {
@@ -32,7 +33,7 @@ const extractArgs = function(argsList) {
     }
     files = argsList.slice(2);
   }
-  return { option, count, files };
+  return {type, option, count, files };
 };
 
 module.exports = { extractArgs };
