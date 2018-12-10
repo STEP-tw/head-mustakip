@@ -45,13 +45,13 @@ const findError = function(args) {
   let isValid = true;
   if (option != "n" && option != "c") {
     error =
-      type+": illegal option -- "+option+"\n"+usage[type];
+      type+": illegal option -- "+option+"\n"+usage[type],    
     isValid = false;
     return { isValid, error };
   }
-  if (!isValidCount(count) && type == "head") {
+  if (!isValidCount(count)) {
     error =
-      type+": illegal " + countType[option] + " count -- " + count;
+      "head: illegal " + countType[option] + " count -- " + count;
     isValid = false;
     return { isValid, error };
   }
@@ -63,7 +63,7 @@ const getHead = function(reader, doesFileExist, args) {
   fileContents = files.map(x =>
     doesFileExist(x)
       ? reader(x, "UTF8")
-      : type+": " + x + ": No such file or directory"
+      : "head: " + x + ": No such file or directory"
   );
   let operation = {
     n: { func: getLines, delimiter: "\n" },
