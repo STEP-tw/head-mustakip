@@ -1,13 +1,23 @@
 const { getHeader, zip } = require("./util.js");
 
-const getHeadLines = function(string, count) {
+const getLines = function(type, string, count) {
   let lines = string.split("\n");
-  return lines.slice(0, count);
+  let linesLength = lines.length;
+  let operation = { 
+    head : lines.slice(0, count),
+    tail : lines.slice(linesLength - count, linesLength)
+  };
+  return operation[type];
 };
 
-const getHeadChars = function(string, numberOfChars) {
+const getChars = function(type, string, count) {
   let chars = string.split("");
-  return chars.slice(0, numberOfChars);
+  let charsLength = chars.length;
+  let operation = { 
+    head : chars.slice(0, count),
+    tail : chars.slice(charsLength - count, charsLength)
+  };
+  return operation[type];
 };
 
 const isValidCount = function(count) {
@@ -38,26 +48,26 @@ const findError = function(args) {
 };
 
 const getHead = function(reader, doesFileExist, args) {
-  let { option, files, count } = args;
+  let {type, option, files, count } = args;
   fileContents = files.map(x =>
     doesFileExist(x)
       ? reader(x, "UTF8")
       : "head: " + x + ": No such file or directory"
   );
-  let head = {
-    n: { func: getHeadLines, delimiter: "\n" },
-    c: { func: getHeadChars, delimiter: "" }
+  let operation = {
+    n: { func: getLines, delimiter: "\n" },
+    c: { func: getChars, delimiter: "" }
   };
   let errorReport = findError(args);
   if (errorReport.isValid == false) {
     return errorReport.error;
   }
-  let delimiter = head[option].delimiter;
+  let delimiter = operation[option].delimiter;
   let headList = fileContents.map(file =>
-    head[option].func(file, count).join(delimiter)
+    operation[option].func(type, file, count).join(delimiter)
   );
   let fileHeaders = files.map(x => (doesFileExist(x) ? getHeader(x) : ""));
-  delimiter = delimiter + head.n.delimiter;
+  delimiter = delimiter + operation.n.delimiter;
   if (headList.length > 1) {
     headList = zip(fileHeaders, headList);
   }
@@ -65,8 +75,8 @@ const getHead = function(reader, doesFileExist, args) {
 };
 
 module.exports = {
-  getHeadLines,
-  getHeadChars,
+  getLines,
+  getChars,
   isValidCount,
   findError,
   getHead

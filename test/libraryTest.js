@@ -1,8 +1,8 @@
 const { deepEqual } = require("assert");
 const {
-  getHeadLines,
+  getLines,
   isValidCount,
-  getHeadChars,
+  getChars,
   findError,
   getHead
 } = require("../src/library.js");
@@ -25,7 +25,7 @@ describe("Test for headLibrary.js", function() {
       deepEqual(isValidCount("m"),false);
     });
   }); 
-  describe("Test getHeadLines function", function() {
+  describe("Test getLines function", function() {
     it("should return array of n number of lines for given input content", function() {
       let inputstring = "This is first line\n";
       inputstring += "This is second line\n";
@@ -34,10 +34,10 @@ describe("Test for headLibrary.js", function() {
       inputstring += "This is fifth line";
 
       expectedOutput_1 = ["This is first line"];
-      expectedOutput_2 = ["This is first line", "This is second line"];
+      expectedOutput_2 = ["This is fourth line", "This is fifth line"];
 
-      deepEqual(getHeadLines(inputstring, 1), expectedOutput_1);
-      deepEqual(getHeadLines(inputstring, 2), expectedOutput_2);
+      deepEqual(getLines("head", inputstring, 1), expectedOutput_1);
+      deepEqual(getLines("tail", inputstring, 2), expectedOutput_2);
     });
   });
 
@@ -115,7 +115,7 @@ describe("Test for headLibrary.js", function() {
       inputstring_1 += "This is third line\n";
       let inputstring_2 = "identification\nrealization\nclassification";
 
-      let args = { files: [inputstring_1], count: 2, option: "n" };
+      let args = {type : "head", files: [inputstring_1], count: 2, option: "n" };
       expectedOutput = "This is first line\nThis is second line";
 
       deepEqual(
@@ -129,6 +129,7 @@ describe("Test for headLibrary.js", function() {
       let inputstring_2 = "identity";
 
       let args = {
+        type : "head",
         files: [inputstring_1, inputstring_2],
         count: 1,
         option: "n"
@@ -147,6 +148,7 @@ describe("Test for headLibrary.js", function() {
       let inputstring_2 = "identity";
 
       let args = {
+        type : "head",
         files: [inputstring_1, inputstring_2],
         count: "0",
         option: "n"
@@ -194,6 +196,7 @@ describe("Test for headLibrary.js", function() {
       let inputstring_2 = "identity";
 
       let args = {
+        type : "head",
         files: ["file"],
         count: "5",
         option: "n"
@@ -207,7 +210,7 @@ describe("Test for headLibrary.js", function() {
     });
   });
 
-  describe("Test getHeadChars function", function() {
+  describe("Test getChars function", function() {
     it("should return array of n number of characters for given input content", function() {
       inputstring = "This is first\n";
       inputstring += "This is second\n";
@@ -266,14 +269,14 @@ describe("Test for headLibrary.js", function() {
         "c"
       ];
 
-      deepEqual(getHeadChars(inputstring, 10), expectedOutput_10);
-      deepEqual(getHeadChars(inputstring, 20), expectedOutput_20);
-      deepEqual(getHeadChars(inputstring, 25), expectedOutput_25);
+      deepEqual(getChars("head", inputstring, 10), expectedOutput_10);
+      deepEqual(getChars("head", inputstring, 20), expectedOutput_20);
+      deepEqual(getChars("head", inputstring, 25), expectedOutput_25);
     });
 
     it("should return empty array for empty input string", function() {
-      deepEqual(getHeadChars("", 1), []);
-      deepEqual(getHeadChars("", 5), []);
+      deepEqual(getChars("head", "", 1), []);
+      deepEqual(getChars("head", "", 5), []);
     });
   });
 });
