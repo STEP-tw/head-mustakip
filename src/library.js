@@ -31,37 +31,44 @@ const isValidCount = function(count) {
 }
 
 const findError = function(args) {
-  let { type, option, files, count } = args;
-  let usage = {
-    "head" : "usage: head [-n lines | -c bytes] [file ...]",
-    "tail" : "usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
-  }
-  let countType = {
-    n: "line",
-    c: "byte"
-  };
+  let { type, option, count } = args;
   let error = "none";
+  let errorType;
   let isValid = true;
   if (option != "n" && option != "c") {
-    error =
-      type+": illegal option -- "+option+"\n"+usage[type],    
-    isValid = false;
-    return { isValid, error };
+    errorType = "illegalOption"; 
+    return generateErrorMessage(errorType,args);
   }
   if (!isValidCount(count) && type == "head") {
-    error =
-      "head: illegal " + countType[option] + " count -- " + count;
-  isValid = false;
-    return { isValid, error };
+    errorType = "illegalCount";
+  return generateErrorMessage(errorType,args);
   }
   if(!isFinite(count)) {
-    error =
-      type+": illegal offset -- " + count;
-    isValid = false;
-    return { isValid, error };
+    errorType = "illegalOffset";
+    return generateErrorMessage(errorType,args);
   }
   return { isValid, error };
 };
+
+const generateErrorMessage = function(errorType,args) {
+  let { type, option, count } = args;
+  let countType = {
+    "n" : "line",
+    "c" : "byte"
+  }
+   let usage = {
+    "head" : "usage: head [-n lines | -c bytes] [file ...]",
+    "tail" : "usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
+  }
+  let errors = {
+    "illegalCount" : type+": illegal "+countType[option]+" count -- "+count,
+    "illegalOffset" : type+": illegal offset -- "+ count,
+    "illegalOption" : type+": illegal option -- "+option+"\n"+usage[type]
+  }
+  let error = errors[errorType];
+  let isValid = false;
+  return { isValid, error };
+}
 
 const getHead = function(reader, doesFileExist, args) {
   let {type, option, files, count } = args;
@@ -94,6 +101,7 @@ module.exports = {
   getLines,
   getChars,
   isValidCount,
+  generateErrorMessage,
   findError,
   getHead
 };

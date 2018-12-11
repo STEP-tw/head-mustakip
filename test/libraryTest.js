@@ -3,6 +3,7 @@ const {
   getLines,
   isValidCount,
   getChars,
+  generateErrorMessage,
   findError,
   getHead
 } = require("../src/library.js");
@@ -139,7 +140,53 @@ describe("Test for library.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
   });
+  describe("Test generateErrorMessage", function() {
+    it("should return an object with isValid false and illegal count error for file name",function() {
+      let args = {
+        type : "tail",
+        option: "n",
+        count: "file1",
+        files: []
+      };
+      let error  = "illegalOffset";
+      let expectedOutput = {
+        isValid: false,
+        error: "tail: illegal offset -- file1"
+      };
 
+      deepEqual(generateErrorMessage(error,args), expectedOutput);
+    });
+    it("should return an object with isValid false and illegal count error for file name",function() {
+      let args = {
+        type : "head",
+        option: "n",
+        count: "file1",
+        files: []
+      };
+      let error  = "illegalCount";
+      let expectedOutput = {
+        isValid: false,
+        error: "head: illegal line count -- file1"
+      };
+
+      deepEqual(generateErrorMessage(error,args), expectedOutput);
+    });
+     it("should return isValid false and illegal option error for invalid option",function() {
+      let args = {
+        type : "head",
+        option: "r",
+        count: "file1",
+        files: []
+      };
+      let error  = "illegalOption";
+      let expectedOutput = {
+        isValid: false,
+        error: "head: illegal option -- r\nusage: head [-n lines | -c bytes] [file ...]"
+      };
+
+      deepEqual(generateErrorMessage(error,args), expectedOutput);
+    });
+  });
   describe("Test getHead", function() {
     const getSameContent = function(content) {
       return content;
