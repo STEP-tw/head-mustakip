@@ -31,10 +31,10 @@ const isValidCount = function(count) {
 };
 
 const findError = function(args) {
-  let { type, option, count } = args;
+  let { type, option, files, count } = args;
   let error = "none";
-  let errorType;
   let isValid = true;
+  let errorType;
   if (option != "n" && option != "c") {
     errorType = "illegalOption";
     return generateErrorMessage(errorType, args);

@@ -140,6 +140,7 @@ describe("Test for library.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
   });
+
   describe("Test generateErrorMessage", function() {
     it("should return an object with isValid false and illegal count error for file name", function() {
       let args = {
@@ -188,6 +189,7 @@ describe("Test for library.js", function() {
       deepEqual(generateErrorMessage(error, args), expectedOutput);
     });
   });
+
   describe("Test getHead", function() {
     const getSameContent = function(content) {
       return content;
