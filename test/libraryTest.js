@@ -200,7 +200,6 @@ describe("Test for library.js", function() {
       let inputstring_1 = "This is first line\n";
       inputstring_1 += "This is second line\n";
       inputstring_1 += "This is third line\n";
-      let inputstring_2 = "identification\nrealization\nclassification";
 
       let args = {type : "head", files: [inputstring_1], count: 2, option: "n" };
       expectedOutput = "This is first line\nThis is second line";
@@ -267,8 +266,6 @@ describe("Test for library.js", function() {
     });
 
     it("should return a error message if the input count is not valid", function() {
-      let inputstring_1 = "This is first";
-      let inputstring_2 = "identity";
 
       let args = { type : "head",files: [], count: "identity", option: "n" };
       expectedOutput = "head: illegal line count -- identity";
@@ -280,8 +277,6 @@ describe("Test for library.js", function() {
     });
 
     it("should return a error message if the input file name is invalid", function() {
-      let inputstring_1 = "This is first";
-      let inputstring_2 = "identity";
 
       let args = {
         type : "head",
