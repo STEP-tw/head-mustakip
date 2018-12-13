@@ -1,4 +1,4 @@
-const { deepEqual } = require("assert");
+const {deepEqual} = require("assert");
 const {
   getLines,
   isValidCount,
@@ -237,17 +237,16 @@ describe("Test for library.js", function() {
       );
     });
 
-    it("should return a error message if the input count is not valid", function() {
-      let inputstring_1 = "This is first";
-      let inputstring_2 = "identity";
+    it("should return a count error for input as a non integer value (head)", function() {
+      let inputstring = "identity";
 
       let args = {
         type: "head",
-        files: [inputstring_1, inputstring_2],
-        count: "0",
+        files: [inputstring],
+        count: "inputstring_1",
         option: "n"
       };
-      expectedOutput = "head: illegal line count -- 0";
+      expectedOutput = "head: illegal line count -- inputstring_1";
 
       deepEqual(
         getHead(getSameContent, isFilePresent.bind(null, true), args),
@@ -255,7 +254,7 @@ describe("Test for library.js", function() {
       );
     });
 
-    it("should return a error message if the input count is not valid", function() {
+    it("should return a count error if the input count is -0 (head)", function() {
       let inputstring_1 = "This is first";
       let inputstring_2 = "identity";
 
@@ -273,8 +272,43 @@ describe("Test for library.js", function() {
       );
     });
 
+    it("should return a empty string for input count 0 instead of an count error (tail)", function() {
+      let inputstring = "functionality";
+
+      let args = {
+        type: "tail",
+        files: [inputstring],
+        count: "0",
+        option: "n"
+      };
+      expectedOutput = "";
+
+      deepEqual(
+        getHead(getSameContent, isFilePresent.bind(null, true), args),
+        expectedOutput
+      );
+    });
+
+    it("should return last 5 characters of each file for tail and count 5", function() {
+      let inputstring_1 = "functionality";
+      let inputstring_2 = "identity";
+
+      let args = {
+        type: "tail",
+        files: [inputstring_1, inputstring_2],
+        count: "5",
+        option: "c"
+      };
+      expectedOutput = "==> functionality <==\nality\n==> identity <==\nntity";
+
+      deepEqual(
+        getHead(getSameContent, isFilePresent.bind(null, true), args),
+        expectedOutput
+      );
+    });
+
     it("should return a error message if the input count is not valid", function() {
-      let args = { type: "head", files: [], count: "identity", option: "n" };
+      let args = {type: "head", files: [], count: "identity", option: "n"};
       expectedOutput = "head: illegal line count -- identity";
 
       deepEqual(
