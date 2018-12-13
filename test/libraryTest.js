@@ -307,6 +307,24 @@ describe("Test for library.js", function() {
       );
     });
 
+    it("should return last line of file for count 1 (tail)", function() {
+      let inputstring_1 = "functionality\n";
+      inputstring_1 += "identity";
+
+      let args = {
+        type: "tail",
+        files: [inputstring_1],
+        count: "1",
+        option: "n"
+      };
+      expectedOutput = "identity";
+
+      deepEqual(
+        getHead(getSameContent, isFilePresent.bind(null, true), args),
+        expectedOutput
+      );
+    });
+
     it("should return a error message if the input count is not valid", function() {
       let args = {type: "head", files: [], count: "identity", option: "n"};
       expectedOutput = "head: illegal line count -- identity";
