@@ -1,9 +1,9 @@
-const {identity, doesIncludeNumber} = require("./util.js");
+const {doesIncludeNumber} = require("./util.js");
 
-const extractArgs = function(argsList) {
-  let length = argsList[1].length;
-  let type = argsList[1].slice(length - 7, length - 3);
-  argsList = argsList.slice(2);
+const extractArgs = function(userInputs) {
+  let length = userInputs[1].length;
+  let type = userInputs[1].slice(length - 7, length - 3);
+  argsList = userInputs.slice(2);
   let option = "n";
   if (argsList[0].startsWith("-")) {
     option = argsList[0].slice(1, 2);
