@@ -191,13 +191,18 @@ describe("Test for library.js", function() {
   });
 
   describe("Test getHead", function() {
-    const getSameContent = function(content) {
+    const readFileSync = function(content) {
       return content;
     };
 
-    const isFilePresent = function(state, fileName) {
-      return state;
+    const existsFileSync = function(name) {
+      if (name == "absentFile") {
+        return false;
+      }
+      return true;
     };
+
+    let fs = {readFileSync, existsFileSync};
 
     it("should return a string of two lines for one input file in args.files", function() {
       let inputstring_1 = "This is first line\n";
@@ -212,10 +217,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "This is first line\nThis is second line";
 
-      deepEqual(
-        getHead(getSameContent, isFilePresent.bind(null, true), args),
-        expectedOutput
-      );
+      deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a string of two lines one of each file for two input files", function() {
@@ -231,10 +233,7 @@ describe("Test for library.js", function() {
       expectedOutput =
         "==> This is first <==\nThis is first\n\n==> identity <==\nidentity";
 
-      deepEqual(
-        getHead(getSameContent, isFilePresent.bind(null, true), args),
-        expectedOutput
-      );
+      deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a count error for input as a non integer value (head)", function() {
@@ -248,10 +247,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "head: illegal line count -- inputstring_1";
 
-      deepEqual(
-        getHead(getSameContent, isFilePresent.bind(null, true), args),
-        expectedOutput
-      );
+      deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a count error if the input count is -0 (head)", function() {
@@ -266,10 +262,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "head: illegal line count -- -0";
 
-      deepEqual(
-        getHead(getSameContent, isFilePresent.bind(null, true), args),
-        expectedOutput
-      );
+      deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a empty string for input count 0 instead of an count error (tail)", function() {
@@ -283,10 +276,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "";
 
-      deepEqual(
-        getHead(getSameContent, isFilePresent.bind(null, true), args),
-        expectedOutput
-      );
+      deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return last 5 characters of each file for tail and count 5", function() {
@@ -301,10 +291,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "==> functionality <==\nality\n==> identity <==\nntity";
 
-      deepEqual(
-        getHead(getSameContent, isFilePresent.bind(null, true), args),
-        expectedOutput
-      );
+      deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return last line of file for count 1 (tail)", function() {
@@ -319,35 +306,26 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "identity";
 
-      deepEqual(
-        getHead(getSameContent, isFilePresent.bind(null, true), args),
-        expectedOutput
-      );
+      deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a error message if the input count is not valid", function() {
       let args = {type: "head", files: [], count: "identity", option: "n"};
       expectedOutput = "head: illegal line count -- identity";
 
-      deepEqual(
-        getHead(getSameContent, isFilePresent.bind(null, true), args),
-        expectedOutput
-      );
+      deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a error message if the input file name is invalid", function() {
       let args = {
         type: "head",
-        files: ["file"],
+        files: ["absentFile"],
         count: "5",
         option: "n"
       };
-      expectedOutput = "head: file: No such file or directory";
+      expectedOutput = "head: absentFile: No such file or directory";
 
-      deepEqual(
-        getHead(getSameContent, isFilePresent.bind(null, false), args),
-        expectedOutput
-      );
+      deepEqual(getHead(fs, args), expectedOutput);
     });
   });
 

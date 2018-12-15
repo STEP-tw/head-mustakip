@@ -1,4 +1,4 @@
-const { getHeader, zip } = require("./util.js");
+const {getHeader, zip} = require("./util.js");
 
 const getLines = function(type, string, count) {
   let lines = string.split("\n");
@@ -31,7 +31,7 @@ const isValidCount = function(count) {
 };
 
 const findError = function(args) {
-  let { type, option, files, count } = args;
+  let {type, option, files, count} = args;
   let error = "none";
   let isValid = true;
   let errorType;
@@ -47,11 +47,11 @@ const findError = function(args) {
     errorType = "illegalOffset";
     return generateErrorMessage(errorType, args);
   }
-  return { isValid, error };
+  return {isValid, error};
 };
 
 const generateErrorMessage = function(errorType, args) {
-  let { type, option, count } = args;
+  let {type, option, count} = args;
   let countType = {
     n: "line",
     c: "byte"
@@ -68,19 +68,20 @@ const generateErrorMessage = function(errorType, args) {
   };
   let error = errors[errorType];
   let isValid = false;
-  return { isValid, error };
+  return {isValid, error};
 };
 
-const getHead = function(reader, doesFileExist, args) {
-  let { type, option, files, count } = args;
+const getHead = function(fs, args) {
+  let {readFileSync, existsFileSync} = fs;
+  let {type, option, files, count} = args;
   fileContents = files.map(x =>
-    doesFileExist(x)
-      ? reader(x, "UTF8")
+    existsFileSync(x)
+      ? readFileSync(x, "UTF8")
       : type + ": " + x + ": No such file or directory"
   );
   let operation = {
-    n: { func: getLines, delimiter: "\n" },
-    c: { func: getChars, delimiter: "" }
+    n: {func: getLines, delimiter: "\n"},
+    c: {func: getChars, delimiter: ""}
   };
   let errorReport = findError(args);
   if (errorReport.isValid == false) {
@@ -90,7 +91,7 @@ const getHead = function(reader, doesFileExist, args) {
   let headList = fileContents.map(file =>
     operation[option].func(type, file, count).join(delimiter)
   );
-  let fileHeaders = files.map(x => (doesFileExist(x) ? getHeader(x) : ""));
+  let fileHeaders = files.map(x => (existsFileSync(x) ? getHeader(x) : ""));
   delimiter = delimiter + operation.n.delimiter;
   if (headList.length > 1) {
     headList = zip(fileHeaders, headList);
