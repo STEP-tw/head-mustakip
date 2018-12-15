@@ -65,7 +65,21 @@ describe("Test for library.js", function() {
   });
 
   describe("Test findError function", function() {
-    it("should return an object with isValid true and error none for valid input  ", function() {
+    it("should return an object with isValid true and error none for valid input count ", function() {
+      let args = {
+        option: "n",
+        count: 5,
+        files: ["file1"]
+      };
+      let expectedOutput = {
+        isValid: true,
+        error: "none"
+      };
+
+      deepEqual(findError(args), expectedOutput);
+    });
+
+    it("should return an object with isValid true and error none for valid input file name", function() {
       let args = {
         option: "n",
         count: 5,
@@ -95,7 +109,7 @@ describe("Test for library.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
 
-    it("should return an object with isValid false and error for -5 as count ", function() {
+    it("should return an object with isValid false and error for -5 as count for head ", function() {
       let args = {
         type: "head",
         option: "n",
@@ -110,7 +124,52 @@ describe("Test for library.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
 
-    it("should return an object with isValid false and error for file name as count ", function() {
+    it("should return an object with isValid false and error for 0 as count (head) ", function() {
+      let args = {
+        type: "head",
+        option: "n",
+        count: "0",
+        files: ["file1"]
+      };
+      let expectedOutput = {
+        isValid: false,
+        error: "head: illegal line count -- 0"
+      };
+
+      deepEqual(findError(args), expectedOutput);
+    });
+
+    it("should return an object with isValid true and error none for 0 as count (tail) ", function() {
+      let args = {
+        type: "tail",
+        option: "n",
+        count: "0",
+        files: ["file1"]
+      };
+      let expectedOutput = {
+        isValid: true,
+        error: "none"
+      };
+
+      deepEqual(findError(args), expectedOutput);
+    });
+
+    it("should return an object with isValid true and error none for -5 as count for tail ", function() {
+      let args = {
+        type: "tail",
+        option: "n",
+        count: "-5",
+        files: ["file1"]
+      };
+      let expectedOutput = {
+        isValid: true,
+        error: "none"
+      };
+
+      deepEqual(findError(args), expectedOutput);
+    });
+
+    it("should return an object with isValid false and error for file name as count (head)", function() {
       let args = {
         type: "head",
         option: "n",
@@ -125,7 +184,7 @@ describe("Test for library.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
 
-    it("should return an object with isValid false and error for file name as count ", function() {
+    it("should return an object with isValid false and error for file name as count (tail)", function() {
       let args = {
         type: "tail",
         option: "n",
