@@ -23,7 +23,7 @@ const extractArgs = function(userInputs) {
     files = argsList.slice(1);
   }
 
-  if (argsList[0].length == 2 && !doesIncludeNumber(argsList[0])) {
+  if (argsList[0].length === 2 && !doesIncludeNumber(argsList[0])) {
     count = argsList[1];
     files = argsList.slice(2);
   }

@@ -39,7 +39,7 @@ const findError = function(args) {
     errorType = "illegalOption";
     return generateErrorMessage(errorType, args);
   }
-  if (!isValidCount(count) && type == "head") {
+  if (!isValidCount(count) && type === "head") {
     errorType = "illegalCount";
     return generateErrorMessage(errorType, args);
   }
