@@ -67,7 +67,7 @@ describe("Test for library.js", function() {
   describe("Test findError function", function() {
     it("should return an object with isValid true and error none for valid input count (head)", function() {
       let args = {
-        type : "head",
+        type: "head",
         option: "n",
         count: 5,
         files: ["file1"]
@@ -82,7 +82,7 @@ describe("Test for library.js", function() {
 
     it("should return error none for valid input count (tail)", function() {
       let args = {
-        type : "tail",
+        type: "tail",
         option: "n",
         count: 5,
         files: ["file1"]
@@ -97,7 +97,7 @@ describe("Test for library.js", function() {
 
     it("should return an object with isValid true and error none for valid input file name", function() {
       let args = {
-        type : "head",
+        type: "head",
         option: "n",
         count: 5,
         files: ["file1"]
@@ -271,14 +271,14 @@ describe("Test for library.js", function() {
       return content;
     };
 
-    const existsFileSync = function(name) {
+    const existsSync = function(name) {
       if (name == "absentFile") {
         return false;
       }
       return true;
     };
 
-    let fs = {readFileSync, existsFileSync};
+    let fs = {readFileSync, existsSync};
 
     it("should return a string of two lines for one input file in args.files", function() {
       let inputstring_1 = "This is first line\n";
