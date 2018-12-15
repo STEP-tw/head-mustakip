@@ -1,4 +1,4 @@
-const {doesIncludeNumber} = require("./util.js");
+const {doesIncludeNumber} = require("../util/util.js");
 
 const extractArgs = function(userInputs) {
   let length = userInputs[1].length;

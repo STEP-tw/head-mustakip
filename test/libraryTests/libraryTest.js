@@ -6,7 +6,7 @@ const {
   generateErrorMessage,
   findError,
   getHead
-} = require("../src/library.js");
+} = require("../../src/library/library.js");
 
 describe("Test for library.js", function() {
   describe("Test isValidCount function", function() {

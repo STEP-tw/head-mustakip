@@ -1,4 +1,4 @@
-const {getHeader, zip} = require("./util.js");
+const {getHeader, zip} = require("../util/util.js");
 
 const getLines = function(type, string, count) {
   let lines = string.split("\n");

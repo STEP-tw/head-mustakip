@@ -1,6 +1,6 @@
 const {deepEqual} = require("assert");
-const {doesIncludeNumber} = require("../src/util.js");
-const {getHeader, zip} = require("../src/util.js");
+const {doesIncludeNumber} = require("../../src/util/util.js");
+const {getHeader, zip} = require("../../src/util/util.js");
 
 describe("Test for util functions", function() {
   describe("Test doesIncludeNumber", function() {
