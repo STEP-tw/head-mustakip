@@ -267,8 +267,17 @@ describe("Test for library.js", function() {
   });
 
   describe("Test getHead", function() {
-    const readFileSync = function(content) {
-      return content;
+    const readFileSync = function(fileName) {
+      let file1 = "This is first line\n";
+      file1 += "This is second line\n";
+      file1 += "This is third line";
+
+      let file2 = "This is fourth line\n";
+      file2 += "This is fifth line\n";
+      file2 += "This is sixth line";
+
+      let contents = {file1, file2};
+      return contents[fileName];
     };
 
     const existsSync = function(name) {
@@ -281,13 +290,9 @@ describe("Test for library.js", function() {
     let fs = {readFileSync, existsSync};
 
     it("should return a string of two lines for one input file in args.files", function() {
-      let inputstring_1 = "This is first line\n";
-      inputstring_1 += "This is second line\n";
-      inputstring_1 += "This is third line\n";
-
       let args = {
         type: "head",
-        files: [inputstring_1],
+        files: ["file1"],
         count: 2,
         option: "n"
       };
@@ -297,17 +302,14 @@ describe("Test for library.js", function() {
     });
 
     it("should return a string of two lines one of each file for two input files", function() {
-      let inputstring_1 = "This is first";
-      let inputstring_2 = "identity";
-
       let args = {
         type: "head",
-        files: [inputstring_1, inputstring_2],
+        files: ["file1", "file2"],
         count: 1,
         option: "n"
       };
       expectedOutput =
-        "==> This is first <==\nThis is first\n\n==> identity <==\nidentity";
+        "==> file1 <==\nThis is first line\n\n==> file2 <==\nThis is fourth line";
 
       deepEqual(getHead(fs, args), expectedOutput);
     });
@@ -317,22 +319,19 @@ describe("Test for library.js", function() {
 
       let args = {
         type: "head",
-        files: [inputstring],
-        count: "inputstring_1",
+        files: ["file1"],
+        count: "file1",
         option: "n"
       };
-      expectedOutput = "head: illegal line count -- inputstring_1";
+      expectedOutput = "head: illegal line count -- file1";
 
       deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a count error if the input count is -0 (head)", function() {
-      let inputstring_1 = "This is first";
-      let inputstring_2 = "identity";
-
       let args = {
         type: "head",
-        files: [inputstring_1, inputstring_2],
+        files: ["file1", "file2"],
         count: "-0",
         option: "n"
       };
@@ -342,11 +341,9 @@ describe("Test for library.js", function() {
     });
 
     it("should return a empty string for input count 0 instead of an count error (tail)", function() {
-      let inputstring = "functionality";
-
       let args = {
         type: "tail",
-        files: [inputstring],
+        files: ["file1"],
         count: "0",
         option: "n"
       };
@@ -356,61 +353,49 @@ describe("Test for library.js", function() {
     });
 
     it("should return last 5 characters of 2 files for option c and count 5 (tail)", function() {
-      let inputstring_1 = "functionality";
-      let inputstring_2 = "identity";
-
       let args = {
         type: "tail",
-        files: [inputstring_1, inputstring_2],
+        files: ["file1", "file2"],
         count: "5",
         option: "c"
       };
-      expectedOutput = "==> functionality <==\nality\n==> identity <==\nntity";
+      expectedOutput = "==> file1 <==\n line\n==> file2 <==\n line";
 
       deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return last 5 characters of file for option c and count 5 (tail)", function() {
-      let inputstring_1 = "functionality";
-      let inputstring_2 = "identity";
-
       let args = {
         type: "tail",
-        files: [inputstring_1, inputstring_2],
+        files: ["file1"],
         count: "5",
         option: "c"
       };
-      expectedOutput = "==> functionality <==\nality\n==> identity <==\nntity";
+      expectedOutput = " line";
 
       deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return last line of file for count 1 (tail)", function() {
-      let inputstring_1 = "functionality\n";
-      inputstring_1 += "identity";
-
       let args = {
         type: "tail",
-        files: [inputstring_1],
+        files: ["file1"],
         count: "1",
         option: "n"
       };
-      expectedOutput = "identity";
+      expectedOutput = "This is third line";
 
       deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return last 2 lines of file for count 2 (tail)", function() {
-      let inputstring_1 = "functionality\n";
-      inputstring_1 += "identity";
-
       let args = {
         type: "tail",
-        files: [inputstring_1],
+        files: ["file1"],
         count: "2",
         option: "n"
       };
-      expectedOutput = "functionality\nidentity";
+      expectedOutput = "This is second line\nThis is third line";
 
       deepEqual(getHead(fs, args), expectedOutput);
     });

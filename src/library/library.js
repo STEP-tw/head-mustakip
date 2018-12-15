@@ -30,12 +30,16 @@ const isValidCount = function(count) {
   return count > 0 && isFinite(count);
 };
 
+const isValidOption = function(option) {
+  return option == "n" || option == "c";
+};
+
 const findError = function(args) {
   let {type, option, count} = args;
   let error = "none";
   let isValid = true;
   let errorType;
-  if (option != "n" && option != "c") {
+  if (!isValidOption(option)) {
     errorType = "illegalOption";
     return generateErrorMessage(errorType, args);
   }
