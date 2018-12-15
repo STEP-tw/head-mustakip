@@ -65,8 +65,24 @@ describe("Test for library.js", function() {
   });
 
   describe("Test findError function", function() {
-    it("should return an object with isValid true and error none for valid input count ", function() {
+    it("should return an object with isValid true and error none for valid input count (head)", function() {
       let args = {
+        type : "head",
+        option: "n",
+        count: 5,
+        files: ["file1"]
+      };
+      let expectedOutput = {
+        isValid: true,
+        error: "none"
+      };
+
+      deepEqual(findError(args), expectedOutput);
+    });
+
+    it("should return error none for valid input count (tail)", function() {
+      let args = {
+        type : "tail",
         option: "n",
         count: 5,
         files: ["file1"]
@@ -81,6 +97,7 @@ describe("Test for library.js", function() {
 
     it("should return an object with isValid true and error none for valid input file name", function() {
       let args = {
+        type : "head",
         option: "n",
         count: 5,
         files: ["file1"]
@@ -154,7 +171,7 @@ describe("Test for library.js", function() {
       deepEqual(findError(args), expectedOutput);
     });
 
-    it("should return an object with isValid true and error none for -5 as count for tail ", function() {
+    it("should return an object with isValid true and error none for -5 as count (tail) ", function() {
       let args = {
         type: "tail",
         option: "n",
@@ -338,7 +355,22 @@ describe("Test for library.js", function() {
       deepEqual(getHead(fs, args), expectedOutput);
     });
 
-    it("should return last 5 characters of each file for tail and count 5", function() {
+    it("should return last 5 characters of 2 files for option c and count 5 (tail)", function() {
+      let inputstring_1 = "functionality";
+      let inputstring_2 = "identity";
+
+      let args = {
+        type: "tail",
+        files: [inputstring_1, inputstring_2],
+        count: "5",
+        option: "c"
+      };
+      expectedOutput = "==> functionality <==\nality\n==> identity <==\nntity";
+
+      deepEqual(getHead(fs, args), expectedOutput);
+    });
+
+    it("should return last 5 characters of file for option c and count 5 (tail)", function() {
       let inputstring_1 = "functionality";
       let inputstring_2 = "identity";
 
@@ -368,6 +400,20 @@ describe("Test for library.js", function() {
       deepEqual(getHead(fs, args), expectedOutput);
     });
 
+    it("should return last 2 lines of file for count 2 (tail)", function() {
+      let inputstring_1 = "functionality\n";
+      inputstring_1 += "identity";
+
+      let args = {
+        type: "tail",
+        files: [inputstring_1],
+        count: "2",
+        option: "n"
+      };
+      expectedOutput = "functionality\nidentity";
+
+      deepEqual(getHead(fs, args), expectedOutput);
+    });
     it("should return a error message if the input count is not valid", function() {
       let args = {type: "head", files: [], count: "identity", option: "n"};
       expectedOutput = "head: illegal line count -- identity";
