@@ -3,7 +3,8 @@ const assert = require("assert");
 const {
   findError,
   generateErrorMessage,
-  isValidCount
+  isValidCount,
+  isValidOption
 } = require("../../src/library/handleError.js");
 
 describe("Test for handleError.js", function() {
@@ -248,6 +249,17 @@ describe("Test for handleError.js", function() {
       assert.deepEqual(isValidCount("obvious"), false);
       assert.deepEqual(isValidCount("iAm1"), false);
       assert.deepEqual(isValidCount("m"), false);
+    });
+  });
+  describe("isValidOption", function() {
+    it("should return true for input option as either n or c", function() {
+      assert.deepEqual(isValidOption("c"), true);
+      assert.deepEqual(isValidOption("n"), true);
+    });
+    it("should return false for any input other than n and c", function() {
+      assert.deepEqual(isValidOption("nc"), false);
+      assert.deepEqual(isValidOption("1"), false);
+      assert.deepEqual(isValidOption("whyn"), false);
     });
   });
 });
