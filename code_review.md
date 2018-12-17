@@ -16,7 +16,7 @@ File : libraryTest.js
 
    type: repitition
        lineNum: none
-       description: using ‘head’ and ‘tail’ at lot of places in message. It could have be written in descibe block.
+       description: using ‘head’ and ‘tail’ at lot of places in message. It could have be written in descibe block. DONE
 
        lineNum: 481 - 483
        description: no need for testing on same type of inputs.
