@@ -1,4 +1,4 @@
-const {deepEqual} = require("assert");
+const assert = require("assert");
 const {
   getLines,
   isValidCount,
@@ -11,19 +11,19 @@ const {
 describe("Test for library.js", function() {
   describe("Test isValidCount function", function() {
     it("should return true for input count as a nonzero positive integer", function() {
-      deepEqual(isValidCount(9), true);
-      deepEqual(isValidCount(1), true);
-      deepEqual(isValidCount(12), true);
+      assert.deepEqual(isValidCount(9), true);
+      assert.deepEqual(isValidCount(1), true);
+      assert.deepEqual(isValidCount(12), true);
     });
     it("should return false for input count zero or negative integer", function() {
-      deepEqual(isValidCount(-4), false);
-      deepEqual(isValidCount(0), false);
-      deepEqual(isValidCount(-1), false);
+      assert.deepEqual(isValidCount(-4), false);
+      assert.deepEqual(isValidCount(0), false);
+      assert.deepEqual(isValidCount(-1), false);
     });
     it("should return false for input count as any words string", function() {
-      deepEqual(isValidCount("obvious"), false);
-      deepEqual(isValidCount("iAm1"), false);
-      deepEqual(isValidCount("m"), false);
+      assert.deepEqual(isValidCount("obvious"), false);
+      assert.deepEqual(isValidCount("iAm1"), false);
+      assert.deepEqual(isValidCount("m"), false);
     });
   });
   describe("Test getLines function", function() {
@@ -37,8 +37,8 @@ describe("Test for library.js", function() {
       expectedOutput_1 = ["This is first line"];
       expectedOutput_2 = ["This is first line", "This is second line"];
 
-      deepEqual(getLines("head", inputstring, 1), expectedOutput_1);
-      deepEqual(getLines("head", inputstring, 2), expectedOutput_2);
+      assert.deepEqual(getLines("head", inputstring, 1), expectedOutput_1);
+      assert.deepEqual(getLines("head", inputstring, 2), expectedOutput_2);
     });
     it("should return array of last n number of lines for given input content for tail", function() {
       let inputstring = "This is first line\n";
@@ -50,8 +50,8 @@ describe("Test for library.js", function() {
       expectedOutput_1 = ["This is fifth line"];
       expectedOutput_2 = ["This is fourth line", "This is fifth line"];
 
-      deepEqual(getLines("tail", inputstring, 1), expectedOutput_1);
-      deepEqual(getLines("tail", inputstring, 2), expectedOutput_2);
+      assert.deepEqual(getLines("tail", inputstring, 1), expectedOutput_1);
+      assert.deepEqual(getLines("tail", inputstring, 2), expectedOutput_2);
     });
     it("should return empty array for given input count 0 for tail", function() {
       let inputstring = "This is first line\n";
@@ -60,7 +60,7 @@ describe("Test for library.js", function() {
       inputstring += "This is fourth line\n";
       inputstring += "This is fifth line";
 
-      deepEqual(getLines("tail", inputstring, 0), []);
+      assert.deepEqual(getLines("tail", inputstring, 0), []);
     });
   });
 
@@ -77,7 +77,7 @@ describe("Test for library.js", function() {
         error: "none"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
 
     it("should return error none for valid input count (tail)", function() {
@@ -92,7 +92,7 @@ describe("Test for library.js", function() {
         error: "none"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
 
     it("should return an object with isValid true and error none for valid input file name", function() {
@@ -107,7 +107,7 @@ describe("Test for library.js", function() {
         error: "none"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
 
     it("should return an object with isValid false and error for invalid option", function() {
@@ -123,7 +123,7 @@ describe("Test for library.js", function() {
           "tail: illegal option -- r\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
 
     it("should return an object with isValid false and error for -5 as count for head ", function() {
@@ -138,7 +138,7 @@ describe("Test for library.js", function() {
         error: "head: illegal line count -- -5"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
 
     it("should return an object with isValid false and error for 0 as count (head) ", function() {
@@ -153,7 +153,7 @@ describe("Test for library.js", function() {
         error: "head: illegal line count -- 0"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
 
     it("should return an object with isValid true and error none for 0 as count (tail) ", function() {
@@ -168,7 +168,7 @@ describe("Test for library.js", function() {
         error: "none"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
 
     it("should return an object with isValid true and error none for -5 as count (tail) ", function() {
@@ -183,7 +183,7 @@ describe("Test for library.js", function() {
         error: "none"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
 
     it("should return an object with isValid false and error for file name as count (head)", function() {
@@ -198,7 +198,7 @@ describe("Test for library.js", function() {
         error: "head: illegal line count -- file1"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
 
     it("should return an object with isValid false and error for file name as count (tail)", function() {
@@ -213,7 +213,7 @@ describe("Test for library.js", function() {
         error: "tail: illegal offset -- file1"
       };
 
-      deepEqual(findError(args), expectedOutput);
+      assert.deepEqual(findError(args), expectedOutput);
     });
   });
 
@@ -231,7 +231,7 @@ describe("Test for library.js", function() {
         error: "tail: illegal offset -- file1"
       };
 
-      deepEqual(generateErrorMessage(error, args), expectedOutput);
+      assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
     });
     it("should return an object with isValid false and illegal count error for file name", function() {
       let args = {
@@ -246,7 +246,7 @@ describe("Test for library.js", function() {
         error: "head: illegal line count -- file1"
       };
 
-      deepEqual(generateErrorMessage(error, args), expectedOutput);
+      assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
     });
     it("should return isValid false and illegal option error for invalid option", function() {
       let args = {
@@ -262,7 +262,7 @@ describe("Test for library.js", function() {
           "head: illegal option -- r\nusage: head [-n lines | -c bytes] [file ...]"
       };
 
-      deepEqual(generateErrorMessage(error, args), expectedOutput);
+      assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
     });
   });
 
@@ -298,7 +298,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "This is first line\nThis is second line";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a string of two lines one of each file for two input files", function() {
@@ -311,7 +311,7 @@ describe("Test for library.js", function() {
       expectedOutput =
         "==> file1 <==\nThis is first line\n\n==> file2 <==\nThis is fourth line";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a count error for input as a non integer value (head)", function() {
@@ -325,7 +325,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "head: illegal line count -- file1";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a count error if the input count is -0 (head)", function() {
@@ -337,7 +337,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "head: illegal line count -- -0";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a empty string for input count 0 instead of an count error (tail)", function() {
@@ -349,7 +349,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return last 5 characters of 2 files for option c and count 5 (tail)", function() {
@@ -361,7 +361,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "==> file1 <==\n line\n==> file2 <==\n line";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return last 5 characters of file for option c and count 5 (tail)", function() {
@@ -373,7 +373,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = " line";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return last line of file for count 1 (tail)", function() {
@@ -385,7 +385,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "This is third line";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return last 2 lines of file for count 2 (tail)", function() {
@@ -397,13 +397,13 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "This is second line\nThis is third line";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
     it("should return a error message if the input count is not valid", function() {
       let args = {type: "head", files: [], count: "identity", option: "n"};
       expectedOutput = "head: illegal line count -- identity";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
 
     it("should return a error message if the input file name is invalid", function() {
@@ -415,7 +415,7 @@ describe("Test for library.js", function() {
       };
       expectedOutput = "head: absentFile: No such file or directory";
 
-      deepEqual(getHead(fs, args), expectedOutput);
+      assert.deepEqual(getHead(fs, args), expectedOutput);
     });
   });
 
@@ -478,14 +478,14 @@ describe("Test for library.js", function() {
         "c"
       ];
 
-      deepEqual(getChars("head", inputstring, 10), expectedOutput_10);
-      deepEqual(getChars("head", inputstring, 20), expectedOutput_20);
-      deepEqual(getChars("head", inputstring, 25), expectedOutput_25);
+      assert.deepEqual(getChars("head", inputstring, 10), expectedOutput_10);
+      assert.deepEqual(getChars("head", inputstring, 20), expectedOutput_20);
+      assert.deepEqual(getChars("head", inputstring, 25), expectedOutput_25);
     });
 
     it("should return empty array for empty input string", function() {
-      deepEqual(getChars("head", "", 1), []);
-      deepEqual(getChars("head", "", 5), []);
+      assert.deepEqual(getChars("head", "", 1), []);
+      assert.deepEqual(getChars("head", "", 5), []);
     });
   });
 });
