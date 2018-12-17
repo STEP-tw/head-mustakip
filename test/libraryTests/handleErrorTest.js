@@ -164,51 +164,72 @@ describe("Test for handleError.js", function() {
   });
 
   describe("generateErrorMessage", function() {
-    it("should return an object with isValid false and illegal count error for file name", function() {
-      let args = {
-        type: "tail",
-        option: "n",
-        count: "file1",
-        files: []
-      };
-      let error = "illegalOffset";
-      let expectedOutput = {
-        isValid: false,
-        error: "tail: illegal offset -- file1"
-      };
+    describe("head", function() {
+      it("should return an object with isValid false and illegal count error for file name", function() {
+        let args = {
+          type: "head",
+          option: "n",
+          count: "file1",
+          files: []
+        };
+        let error = "illegalCount";
+        let expectedOutput = {
+          isValid: false,
+          error: "head: illegal line count -- file1"
+        };
 
-      assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
+        assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
+      });
+      it("should return isValid false and illegal option error for invalid option", function() {
+        let args = {
+          type: "head",
+          option: "r",
+          count: "file1",
+          files: []
+        };
+        let error = "illegalOption";
+        let expectedOutput = {
+          isValid: false,
+          error:
+            "head: illegal option -- r\nusage: head [-n lines | -c bytes] [file ...]"
+        };
+
+        assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
+      });
     });
-    it("should return an object with isValid false and illegal count error for file name", function() {
-      let args = {
-        type: "head",
-        option: "n",
-        count: "file1",
-        files: []
-      };
-      let error = "illegalCount";
-      let expectedOutput = {
-        isValid: false,
-        error: "head: illegal line count -- file1"
-      };
+    describe("tail", function() {
+      it("should return an object with isValid false and illegal offset error for file name", function() {
+        let args = {
+          type: "tail",
+          option: "n",
+          count: "file1",
+          files: []
+        };
+        let error = "illegalOffset";
+        let expectedOutput = {
+          isValid: false,
+          error: "tail: illegal offset -- file1"
+        };
 
-      assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
-    });
-    it("should return isValid false and illegal option error for invalid option", function() {
-      let args = {
-        type: "head",
-        option: "r",
-        count: "file1",
-        files: []
-      };
-      let error = "illegalOption";
-      let expectedOutput = {
-        isValid: false,
-        error:
-          "head: illegal option -- r\nusage: head [-n lines | -c bytes] [file ...]"
-      };
+        assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
+      });
 
-      assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
+      it("should return isValid false and illegal option error for invalid option", function() {
+        let args = {
+          type: "tail",
+          option: "r",
+          count: "file1",
+          files: []
+        };
+        let error = "illegalOption";
+        let expectedOutput = {
+          isValid: false,
+          error:
+            "tail: illegal option -- r\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
+        };
+
+        assert.deepEqual(generateErrorMessage(error, args), expectedOutput);
+      });
     });
   });
 
