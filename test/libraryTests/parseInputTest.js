@@ -1,5 +1,5 @@
 const assert = require("assert");
-const {extractArgs} = require("../../src/library/parsingInput.js");
+const {extractArgs} = require("../../src/library/parseInput.js");
 
 describe("Test for parsingInput.js", function() {
   describe("Test extractArgs", function() {
