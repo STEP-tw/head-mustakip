@@ -20,13 +20,12 @@ const getLines = function(type, string, count) {
 
 const getChars = function(type, string, count) {
   let chars = string.split("");
-  let charsLength = chars.length;
-  if (count > charsLength) {
-    count = charsLength;
+  if (count == 0) {
+    return [];
   }
   let operation = {
     head: chars.slice(0, count),
-    tail: chars.slice(charsLength - count, charsLength)
+    tail: chars.slice(-Math.abs(count))
   };
   return operation[type];
 };

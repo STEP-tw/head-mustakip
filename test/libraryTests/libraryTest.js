@@ -262,39 +262,83 @@ describe("Test for library.js", function() {
   });
 
   describe("getChars", function() {
-    it("should return array of n number of characters when input count is n", function() {
-      fileContent = "This is first\n";
-      fileContent += "This is second\n";
-      fileContent += "This is third\n";
-      fileContent += "This is fourth\n";
-      fileContent += "This is fifth";
+    describe("head", function() {
+      it("should return array of first n number of characters when input count is n", function() {
+        fileContent = "This is first\n";
+        fileContent += "This is second\n";
+        fileContent += "This is third\n";
+        fileContent += "This is fourth\n";
+        fileContent += "This is fifth";
 
-      expectedOutput_10 = ["T", "h", "i", "s", " ", "i", "s", " ", "f", "i"];
-      expectedOutput_20 = [
-        "T",
-        "h",
-        "i",
-        "s",
-        " ",
-        "i",
-        "s",
-        " ",
-        "f",
-        "i",
-        "r",
-        "s",
-        "t",
-        "\n",
-        "T"
-      ];
+        expectedOutput_10 = ["T", "h", "i", "s", " ", "i", "s", " ", "f", "i"];
+        expectedOutput_20 = [
+          "T",
+          "h",
+          "i",
+          "s",
+          " ",
+          "i",
+          "s",
+          " ",
+          "f",
+          "i",
+          "r",
+          "s",
+          "t",
+          "\n",
+          "T"
+        ];
 
-      assert.deepEqual(getChars("head", fileContent, 10), expectedOutput_10);
-      assert.deepEqual(getChars("head", fileContent, 15), expectedOutput_20);
+        assert.deepEqual(getChars("head", fileContent, 10), expectedOutput_10);
+        assert.deepEqual(getChars("head", fileContent, 15), expectedOutput_20);
+      });
+
+      it("should return empty array for empty input string", function() {
+        assert.deepEqual(getChars("head", "", 1), []);
+        assert.deepEqual(getChars("head", "", 5), []);
+      });
     });
+    describe("tail", function() {
+      it("should return array of last n number of characters when input count is n", function() {
+        fileContent = "This is first\n";
+        fileContent += "This is second\n";
+        fileContent += "This is third\n";
+        fileContent += "This is fourth\n";
+        fileContent += "This is fifth";
 
-    it("should return empty array for empty input string", function() {
-      assert.deepEqual(getChars("head", "", 1), []);
-      assert.deepEqual(getChars("head", "", 5), []);
+        expectedOutput_10 = ["s", " ", "i", "s", " ", "f", "i", "f", "t", "h"];
+        expectedOutput_20 = [
+          "h",
+          "\n",
+          "T",
+          "h",
+          "i",
+          "s",
+          " ",
+          "i",
+          "s",
+          " ",
+          "f",
+          "i",
+          "f",
+          "t",
+          "h"
+        ];
+
+        assert.deepEqual(getChars("tail", fileContent, 10), expectedOutput_10);
+        assert.deepEqual(getChars("tail", fileContent, 15), expectedOutput_20);
+      });
+
+      it("should return empty array when input count is 0", function() {
+        fileContent = "This is first\n";
+        fileContent += "This is second\n";
+
+        assert.deepEqual(getChars("tail", fileContent, 0), []);
+      });
+      it("should return empty array for empty input string", function() {
+        assert.deepEqual(getChars("head", "", 1), []);
+        assert.deepEqual(getChars("head", "", 5), []);
+      });
     });
   });
 });
