@@ -219,7 +219,7 @@ describe("Test isValidCount function", function() {
     assert.deepEqual(isValidCount(0), false);
     assert.deepEqual(isValidCount(-1), false);
   });
-  it("should return false for input count as any words string", function() {
+  it("should return false for input count as any alphanumeric string", function() {
     assert.deepEqual(isValidCount("obvious"), false);
     assert.deepEqual(isValidCount("iAm1"), false);
     assert.deepEqual(isValidCount("m"), false);

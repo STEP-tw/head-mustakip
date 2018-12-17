@@ -1,18 +1,18 @@
 File : libraryTest.js
 
    lineNum: 1
-   description: destructuring of deepEqual instead of assert.
+   description: destructuring of deepEqual instead of assert. DONE
 
    type: long file
        lineNum: none
-       description: findErrors must be in a different file.
+       description: findErrors must be in a different file. DONE
 
    type: test message not clear
        lineNum: 23
-       description: ‘alphanumberic’ looks better than ‘word’.
+       description: ‘alphanumberic’ looks better than ‘word’. DONE
 
        lineNum : 43, 30
-       description: ‘when’ is not described
+       description: ‘when’ is not described DONE
 
    type: repitition
        lineNum: none
