@@ -1,11 +1,34 @@
 const assert = require("assert");
 const {
+  read,
+  applyHeader,
   getLines,
   getChars,
   getContent
 } = require("../../src/library/library.js");
 
 describe("Test for library.js", function() {
+  const readFileSync = function(filePath) {
+    let file1 = "This is first line\n";
+    file1 += "This is second line\n";
+    file1 += "This is third line";
+
+    let file2 = "This is fourth line\n";
+    file2 += "This is fifth line\n";
+    file2 += "This is sixth line";
+
+    let contents = {file1, file2};
+    return contents[filePath];
+  };
+
+  const existsSync = function(filePath) {
+    let filePaths = ["file1", "file2"];
+    if (!filePaths.includes(filePath)) {
+      return false;
+    }
+    return true;
+  };
+  let fs = {readFileSync, existsSync};
   describe("getLines", function() {
     describe("head", function() {
       it("should return array of first n number of lines when count is n", function() {
@@ -61,28 +84,6 @@ describe("Test for library.js", function() {
   });
 
   describe("getContent", function() {
-    const readFileSync = function(filePath) {
-      let file1 = "This is first line\n";
-      file1 += "This is second line\n";
-      file1 += "This is third line";
-
-      let file2 = "This is fourth line\n";
-      file2 += "This is fifth line\n";
-      file2 += "This is sixth line";
-
-      let contents = {file1, file2};
-      return contents[filePath];
-    };
-
-    const existsSync = function(filePath) {
-      let filePaths = ["file1", "file2"];
-      if (!filePaths.includes(filePath)) {
-        return false;
-      }
-      return true;
-    };
-
-    let fs = {readFileSync, existsSync};
     describe("head", function() {
       it("should return 2 lines for count 2 when one file is provided", function() {
         let args = {
@@ -340,6 +341,27 @@ describe("Test for library.js", function() {
         assert.deepEqual(getChars("tail", "", 1), []);
         assert.deepEqual(getChars("tail", "", 5), []);
       });
+    });
+  });
+  describe("read", function() {
+    it("should return file content when file path is provided", function() {
+      let expectedOutput = "This is fourth line\n";
+      expectedOutput += "This is fifth line\n";
+      expectedOutput += "This is sixth line";
+
+      assert.deepEqual(read(fs, "head", "file2"), expectedOutput);
+    });
+
+    it("should return head error when file is not present and type is head", function() {
+      let expectedOutput = "head: filex: No such file or directory";
+
+      assert.deepEqual(read(fs, "head", "filex"), expectedOutput);
+    });
+
+    it("should return tail error when file is not present and type is tail", function() {
+      let expectedOutput = "tail: filex: No such file or directory";
+
+      assert.deepEqual(read(fs, "tail", "filex"), expectedOutput);
     });
   });
 });

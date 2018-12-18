@@ -80,5 +80,7 @@ module.exports = {
   isValidCount,
   generateErrorMessage,
   findError,
+  applyHeader,
+  read,
   getContent
 };
