@@ -344,7 +344,7 @@ describe("Test for library.js", function() {
     });
   });
   describe("read", function() {
-    it("should return file content when file path is provided", function() {
+    it("should return file content when file exists", function() {
       let expectedOutput = "This is fourth line\n";
       expectedOutput += "This is fifth line\n";
       expectedOutput += "This is sixth line";
@@ -367,6 +367,9 @@ describe("Test for library.js", function() {
   describe("applyHeader", function() {
     it("should return fileHeader when the file exists", function() {
       assert.deepEqual(applyHeader(fs, "file1"), "==> file1 <==\n");
+    });
+    it("should return empty string when the file do not exists", function() {
+      assert.deepEqual(applyHeader(fs, "filex"), "");
     });
   });
 });
