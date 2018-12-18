@@ -326,21 +326,34 @@ describe("Test for library.js", function() {
   });
   describe("read", function() {
     it("should return file content when file exists", function() {
-      let expectedOutput = "This is fourth line\n";
-      expectedOutput += "This is fifth line\n";
-      expectedOutput += "This is sixth line";
+      let fileContent = "This is fourth line\n";
+      fileContent += "This is fifth line\n";
+      fileContent += "This is sixth line";
 
+      let expectedOutput = {
+        fileContent: fileContent,
+        error: ""
+      };
       assert.deepEqual(read(fs, "head", "file2"), expectedOutput);
     });
 
     it("should return head error when file is not present and type is head", function() {
-      let expectedOutput = "head: filex: No such file or directory";
+      let error = "head: filex: No such file or directory";
 
+      let expectedOutput = {
+        fileContent: "",
+        error: error
+      };
       assert.deepEqual(read(fs, "head", "filex"), expectedOutput);
     });
 
     it("should return tail error when file is not present and type is tail", function() {
-      let expectedOutput = "tail: filex: No such file or directory";
+      let error = "tail: filex: No such file or directory";
+
+      let expectedOutput = {
+        fileContent: "",
+        error: error
+      };
 
       assert.deepEqual(read(fs, "tail", "filex"), expectedOutput);
     });

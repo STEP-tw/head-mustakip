@@ -34,9 +34,11 @@ const sliceContent = function(delimiter, type, fileContent, count) {
 const read = function(fs, type, filePath) {
   let {readFileSync, existsSync} = fs;
   if (existsSync(filePath)) {
-    return readFileSync(filePath, "UTF8");
+    let fileContent = readFileSync(filePath, "UTF8");
+    return {fileContent, error: ""};
   }
-  return type + ": " + filePath + ": No such file or directory";
+  let error = type + ": " + filePath + ": No such file or directory";
+  return {fileContent: "", error};
 };
 
 const applyHeader = function(fs, filePath) {
@@ -49,7 +51,9 @@ const applyHeader = function(fs, filePath) {
 
 const getContent = function(fs, args) {
   let {type, option, filePaths, count} = args;
-  fileContents = filePaths.map(read.bind(null, fs, type));
+  fileContents = filePaths
+    .map(read.bind(null, fs, type))
+    .map(x => x.fileContent || x.error);
 
   let operations = {
     head: getHead,
