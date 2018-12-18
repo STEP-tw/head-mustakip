@@ -49,14 +49,14 @@ fileName: library.js
        description: 'headList' is not clear. Names like 'filteredContents' are better.
 
        lineNum: 40
-       description: 'isValid' could be named better.
+       description: 'isValid' could be named better. DONE
 
        lineNum: 78
-       desciption: the 'getHead' function does the work of tail also.
+       desciption: the 'getHead' function does the work of tail also. DONE
 
    type: duplication
        lineNum: -
-       description: getLines and getChars are same except delimiter.
+       description: getLines and getChars are same except delimiter. 
 
    type: logicError
        lineNum: 91

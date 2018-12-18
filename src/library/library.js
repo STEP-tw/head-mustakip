@@ -5,15 +5,19 @@ const {
   isValidCount
 } = require("../library/handleError.js");
 
-const getLines = function(type, fileContent, count) {
-  let lines = fileContent.split("\n");
-  let linesLength = lines.length;
-  if (count > linesLength) {
-    count = linesLength;
+const getLines = function(option, type, fileContent, count) {
+  let delimiter = {
+    n: "\n",
+    c: ""
+  };
+
+  let lines = fileContent.split(delimiter[option]);
+  if (count == 0) {
+    return [];
   }
   let operation = {
     head: lines.slice(0, count),
-    tail: lines.slice(linesLength - count, linesLength)
+    tail: lines.slice(-Math.abs(count))
   };
   return operation[type];
 };
@@ -43,12 +47,12 @@ const getContent = function(fs, args) {
     c: {func: getChars, delimiter: ""}
   };
   let errorReport = findError(args);
-  if (errorReport.isValid == false) {
+  if (!errorReport.isValid) {
     return errorReport.error;
   }
   let delimiter = operation[option].delimiter;
   let headList = fileContents.map(file =>
-    operation[option].func(type, file, count).join(delimiter)
+    getLines(option, type, file, count).join(delimiter)
   );
   let fileHeaders = filePaths.map(x => (existsSync(x) ? getHeader(x) : ""));
   delimiter = delimiter + operation.n.delimiter;

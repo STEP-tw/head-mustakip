@@ -18,8 +18,14 @@ describe("Test for library.js", function() {
         expectedOutput_1 = ["This is first line"];
         expectedOutput_2 = ["This is first line", "This is second line"];
 
-        assert.deepEqual(getLines("head", fileContent, 1), expectedOutput_1);
-        assert.deepEqual(getLines("head", fileContent, 2), expectedOutput_2);
+        assert.deepEqual(
+          getLines("n", "head", fileContent, 1),
+          expectedOutput_1
+        );
+        assert.deepEqual(
+          getLines("n", "head", fileContent, 2),
+          expectedOutput_2
+        );
       });
     });
     describe("tail", function() {
@@ -33,8 +39,14 @@ describe("Test for library.js", function() {
         expectedOutput_1 = ["This is fifth line"];
         expectedOutput_2 = ["This is fourth line", "This is fifth line"];
 
-        assert.deepEqual(getLines("tail", fileContent, 1), expectedOutput_1);
-        assert.deepEqual(getLines("tail", fileContent, 2), expectedOutput_2);
+        assert.deepEqual(
+          getLines("n", "tail", fileContent, 1),
+          expectedOutput_1
+        );
+        assert.deepEqual(
+          getLines("n", "tail", fileContent, 2),
+          expectedOutput_2
+        );
       });
       it("should return empty array when input count is 0", function() {
         let fileContent = "This is first line\n";
@@ -43,7 +55,7 @@ describe("Test for library.js", function() {
         fileContent += "This is fourth line\n";
         fileContent += "This is fifth line";
 
-        assert.deepEqual(getLines("tail", fileContent, 0), []);
+        assert.deepEqual(getLines("n", "tail", fileContent, 0), []);
       });
     });
   });
