@@ -364,4 +364,9 @@ describe("Test for library.js", function() {
       assert.deepEqual(read(fs, "tail", "filex"), expectedOutput);
     });
   });
+  describe("applyHeader", function() {
+    it("should return fileHeader when the file exists", function() {
+      assert.deepEqual(applyHeader(fs, "file1"), "==> file1 <==\n");
+    });
+  });
 });
