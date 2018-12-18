@@ -3,10 +3,6 @@ const doesIncludeNumber = function(string) {
   return numbers.some(x => string.includes(x));
 };
 
-const getHeader = function(text) {
-  return "==> " + text + " <==\n";
-};
-
 const zip = function(list1, list2) {
   let zippedList = [];
   for (index in list1) {
@@ -17,6 +13,5 @@ const zip = function(list1, list2) {
 
 module.exports = {
   doesIncludeNumber,
-  getHeader,
   zip
 };

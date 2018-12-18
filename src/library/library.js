@@ -44,7 +44,7 @@ const read = function(fs, type, filePath) {
 const applyHeader = function(fs, filePath) {
   let {existsSync} = fs;
   if (existsSync(filePath)) {
-    return getHeader(filePath);
+    return "==> " + filePath + " <==\n";
   }
   return "";
 };
