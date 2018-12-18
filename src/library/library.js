@@ -5,31 +5,28 @@ const {
   isValidCount
 } = require("../library/handleError.js");
 
-const getLines = function(option, type, fileContent, count) {
-  let delimiter = {
-    n: "\n",
-    c: ""
-  };
-
-  let lines = fileContent.split(delimiter[option]);
-  if (count == 0) {
-    return [];
-  }
-  let operation = {
-    head: lines.slice(0, count),
-    tail: lines.slice(-Math.abs(count))
-  };
-  return operation[type];
+const delimiters = {
+  n: "\n",
+  c: ""
+};
+const getHead = function(option, fileContent, count) {
+  let delimiter = delimiters[option];
+  return sliceContent(delimiter, "head", fileContent, count);
 };
 
-const getChars = function(type, fileContent, count) {
-  let chars = fileContent.split("");
+const getTail = function(option, fileContent, count) {
+  let delimiter = delimiters[option];
+  return sliceContent(delimiter, "tail", fileContent, count);
+};
+
+const sliceContent = function(delimiter, type, fileContent, count) {
+  let data = fileContent.split(delimiter);
   if (count == 0) {
     return [];
   }
   let operation = {
-    head: chars.slice(0, count),
-    tail: chars.slice(-Math.abs(count))
+    head: data.slice(0, count),
+    tail: data.slice(-Math.abs(count))
   };
   return operation[type];
 };
@@ -52,22 +49,22 @@ const applyHeader = function(fs, filePath) {
 
 const getContent = function(fs, args) {
   let {type, option, filePaths, count} = args;
-  let {existsSync} = fs;
   fileContents = filePaths.map(read.bind(null, fs, type));
-  let operation = {
-    n: {func: getLines, delimiter: "\n"},
-    c: {func: getChars, delimiter: ""}
+
+  let operations = {
+    head: getHead,
+    tail: getTail
   };
   let errorReport = findError(args);
   if (!errorReport.isValid) {
     return errorReport.error;
   }
-  let delimiter = operation[option].delimiter;
-  let headList = fileContents.map(file =>
-    getLines(option, type, file, count).join(delimiter)
+  let delimiter = delimiters[option];
+  let headList = fileContents.map(fileContent =>
+    operations[type](option, fileContent, count).join(delimiter)
   );
   let fileHeaders = filePaths.map(applyHeader.bind(null, fs));
-  delimiter = delimiter + operation.n.delimiter;
+  delimiter = delimiter + delimiters["n"];
   if (headList.length > 1) {
     headList = zip(fileHeaders, headList);
   }
@@ -75,8 +72,9 @@ const getContent = function(fs, args) {
 };
 
 module.exports = {
-  getLines,
-  getChars,
+  sliceContent,
+  getHead,
+  getTail,
   isValidCount,
   generateErrorMessage,
   findError,

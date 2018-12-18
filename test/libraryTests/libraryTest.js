@@ -1,9 +1,10 @@
 const assert = require("assert");
 const {
   read,
+  getHead,
+  getTail,
+  sliceContent,
   applyHeader,
-  getLines,
-  getChars,
   getContent
 } = require("../../src/library/library.js");
 
@@ -29,57 +30,38 @@ describe("Test for library.js", function() {
     return true;
   };
   let fs = {readFileSync, existsSync};
-  describe("getLines", function() {
-    describe("head", function() {
-      it("should return array of first n number of lines when count is n", function() {
-        let fileContent = "This is first line\n";
-        fileContent += "This is second line\n";
-        fileContent += "This is third line n";
-        fileContent += "This is fourth line\n";
-        fileContent += "This is fifth line";
+  describe("getHead", function() {
+    it("should return array of first n number of characters when input count is n", function() {
+      fileContent = "This is first\n";
+      fileContent += "This is second\n";
+      fileContent += "This is third\n";
+      fileContent += "This is fourth\n";
+      fileContent += "This is fifth";
 
-        expectedOutput_1 = ["This is first line"];
-        expectedOutput_2 = ["This is first line", "This is second line"];
+      expectedOutput_10 = "This is fi".split("");
+      expectedOutput_20 = "This is first\nT".split("");
 
-        assert.deepEqual(
-          getLines("n", "head", fileContent, 1),
-          expectedOutput_1
-        );
-        assert.deepEqual(
-          getLines("n", "head", fileContent, 2),
-          expectedOutput_2
-        );
-      });
+      assert.deepEqual(getHead("c", fileContent, 10), expectedOutput_10);
+      assert.deepEqual(getHead("c", fileContent, 15), expectedOutput_20);
     });
-    describe("tail", function() {
-      it("should return array of last n number of lines when count is n", function() {
-        let fileContent = "This is first line\n";
-        fileContent += "This is second line\n";
-        fileContent += "This is third line\n";
-        fileContent += "This is fourth line\n";
-        fileContent += "This is fifth line";
 
-        expectedOutput_1 = ["This is fifth line"];
-        expectedOutput_2 = ["This is fourth line", "This is fifth line"];
+    it("should return empty array for empty input fileContent", function() {
+      assert.deepEqual(getHead("c", "", 1), []);
+      assert.deepEqual(getHead("c", "", 5), []);
+    });
 
-        assert.deepEqual(
-          getLines("n", "tail", fileContent, 1),
-          expectedOutput_1
-        );
-        assert.deepEqual(
-          getLines("n", "tail", fileContent, 2),
-          expectedOutput_2
-        );
-      });
-      it("should return empty array when input count is 0", function() {
-        let fileContent = "This is first line\n";
-        fileContent += "This is second line\n";
-        fileContent += "This is third line\n";
-        fileContent += "This is fourth line\n";
-        fileContent += "This is fifth line";
+    it("should return array of first n number of lines when count is n", function() {
+      let fileContent = "This is first line\n";
+      fileContent += "This is second line\n";
+      fileContent += "This is third line n";
+      fileContent += "This is fourth line\n";
+      fileContent += "This is fifth line";
 
-        assert.deepEqual(getLines("n", "tail", fileContent, 0), []);
-      });
+      expectedOutput_1 = ["This is first line"];
+      expectedOutput_2 = ["This is first line", "This is second line"];
+
+      assert.deepEqual(getHead("n", fileContent, 1), expectedOutput_1);
+      assert.deepEqual(getHead("n", fileContent, 2), expectedOutput_2);
     });
   });
 
@@ -278,69 +260,68 @@ describe("Test for library.js", function() {
     });
   });
 
-  describe("getChars", function() {
-    describe("head", function() {
-      it("should return array of first n number of characters when input count is n", function() {
-        fileContent = "This is first\n";
-        fileContent += "This is second\n";
-        fileContent += "This is third\n";
-        fileContent += "This is fourth\n";
-        fileContent += "This is fifth";
+  describe("getTail", function() {
+    it("should return whole file content if count is greater than the chars in file", function() {
+      let fileContent = "ball\n";
+      fileContent += "lol";
 
-        expectedOutput_10 = "This is fi".split("");
-        expectedOutput_20 = "This is first\nT".split("");
-
-        assert.deepEqual(getChars("head", fileContent, 10), expectedOutput_10);
-        assert.deepEqual(getChars("head", fileContent, 15), expectedOutput_20);
-      });
-
-      it("should return empty array for empty input fileContent", function() {
-        assert.deepEqual(getChars("head", "", 1), []);
-        assert.deepEqual(getChars("head", "", 5), []);
-      });
-
-      it("should return whole file content if count is greater than the chars in file", function() {
-        let fileContent = "ball\n";
-        fileContent += "lol";
-
-        let expectedOutput = fileContent.split("");
-        assert.deepEqual(getChars("head", fileContent, 15), expectedOutput);
-      });
+      let expectedOutput = fileContent.split("");
+      assert.deepEqual(getTail("c", fileContent, 15), expectedOutput);
     });
-    describe("tail", function() {
-      it("should return array of last n number of characters when input count is n", function() {
-        fileContent = "This is first\n";
-        fileContent += "This is second\n";
-        fileContent += "This is third\n";
-        fileContent += "This is fourth\n";
-        fileContent += "This is fifth";
+    it("should return array of last n number of characters when input count is n", function() {
+      fileContent = "This is first\n";
+      fileContent += "This is second\n";
+      fileContent += "This is third\n";
+      fileContent += "This is fourth\n";
+      fileContent += "This is fifth";
 
-        expectedOutput_10 = "s is fifth".split("");
-        expectedOutput_20 = "h\nThis is fifth".split("");
+      expectedOutput_10 = "s is fifth".split("");
+      expectedOutput_20 = "h\nThis is fifth".split("");
 
-        assert.deepEqual(getChars("tail", fileContent, 10), expectedOutput_10);
-        assert.deepEqual(getChars("tail", fileContent, 15), expectedOutput_20);
-      });
+      assert.deepEqual(getTail("c", fileContent, 10), expectedOutput_10);
+      assert.deepEqual(getTail("c", fileContent, 15), expectedOutput_20);
+    });
 
-      it("should return empty array when input count is 0", function() {
-        fileContent = "This is first\n";
-        fileContent += "This is second\n";
+    it("should return empty array when input count is 0", function() {
+      fileContent = "This is first\n";
+      fileContent += "This is second\n";
 
-        assert.deepEqual(getChars("tail", fileContent, 0), []);
-      });
+      assert.deepEqual(getTail("c", fileContent, 0), []);
+    });
 
-      it("should return whole file content if count is greater than the chars in file", function() {
-        let fileContent = "ball\n";
-        fileContent += "lol";
+    it("should return whole file content if count is greater than the chars in file", function() {
+      let fileContent = "ball\n";
+      fileContent += "lol";
 
-        let expectedOutput = fileContent.split("");
-        assert.deepEqual(getChars("tail", fileContent, 15), expectedOutput);
-      });
+      let expectedOutput = fileContent.split("");
+      assert.deepEqual(getTail("c", fileContent, 15), expectedOutput);
+    });
 
-      it("should return empty array for empty input fileContent", function() {
-        assert.deepEqual(getChars("tail", "", 1), []);
-        assert.deepEqual(getChars("tail", "", 5), []);
-      });
+    it("should return empty array for empty input fileContent", function() {
+      assert.deepEqual(getTail("c", "", 1), []);
+      assert.deepEqual(getTail("c", "", 5), []);
+    });
+    it("should return array of last n number of lines when count is n", function() {
+      let fileContent = "This is first line\n";
+      fileContent += "This is second line\n";
+      fileContent += "This is third line\n";
+      fileContent += "This is fourth line\n";
+      fileContent += "This is fifth line";
+
+      expectedOutput_1 = ["This is fifth line"];
+      expectedOutput_2 = ["This is fourth line", "This is fifth line"];
+
+      assert.deepEqual(getTail("n", fileContent, 1), expectedOutput_1);
+      assert.deepEqual(getTail("n", fileContent, 2), expectedOutput_2);
+    });
+    it("should return empty array when input count is 0", function() {
+      let fileContent = "This is first line\n";
+      fileContent += "This is second line\n";
+      fileContent += "This is third line\n";
+      fileContent += "This is fourth line\n";
+      fileContent += "This is fifth line";
+
+      assert.deepEqual(getTail("n", fileContent, 0), []);
     });
   });
   describe("read", function() {
@@ -370,6 +351,136 @@ describe("Test for library.js", function() {
     });
     it("should return empty string when the file do not exists", function() {
       assert.deepEqual(applyHeader(fs, "filex"), "");
+    });
+  });
+  describe("sliceContent", function() {
+    describe("tail", function() {
+      it("should return whole file content if count is greater than the chars in file", function() {
+        let fileContent = "ball\n";
+        fileContent += "lol";
+
+        let expectedOutput = fileContent.split("");
+        assert.deepEqual(
+          sliceContent("", "tail", fileContent, 15),
+          expectedOutput
+        );
+      });
+      it("should return array of last n number of characters when input count is n", function() {
+        fileContent = "This is first\n";
+        fileContent += "This is second\n";
+        fileContent += "This is third\n";
+        fileContent += "This is fourth\n";
+        fileContent += "This is fifth";
+
+        expectedOutput_10 = "s is fifth".split("");
+        expectedOutput_20 = "h\nThis is fifth".split("");
+
+        assert.deepEqual(
+          sliceContent("", "tail", fileContent, 10),
+          expectedOutput_10
+        );
+        assert.deepEqual(
+          sliceContent("", "tail", fileContent, 15),
+          expectedOutput_20
+        );
+      });
+
+      it("should return empty array when input count is 0", function() {
+        fileContent = "This is first\n";
+        fileContent += "This is second\n";
+
+        assert.deepEqual(sliceContent("\n", "tail", fileContent, 0), []);
+      });
+
+      it("should return whole file content if count is greater than the chars in file", function() {
+        let fileContent = "ball\n";
+        fileContent += "lol";
+
+        let expectedOutput = fileContent.split("");
+        assert.deepEqual(
+          sliceContent("", "tail", fileContent, 15),
+          expectedOutput
+        );
+      });
+
+      it("should return empty array for empty input fileContent", function() {
+        assert.deepEqual(sliceContent("\n", "tail", "", 1), [""]);
+        assert.deepEqual(sliceContent("\n", "tail", "", 5), [""]);
+      });
+      it("should return array of last n number of lines when count is n", function() {
+        let fileContent = "This is first line\n";
+        fileContent += "This is second line\n";
+        fileContent += "This is third line\n";
+        fileContent += "This is fourth line\n";
+        fileContent += "This is fifth line";
+
+        expectedOutput_1 = ["This is fifth line"];
+        expectedOutput_2 = ["This is fourth line", "This is fifth line"];
+
+        assert.deepEqual(
+          sliceContent("\n", "tail", fileContent, 1),
+          expectedOutput_1
+        );
+        assert.deepEqual(
+          sliceContent("\n", "tail", fileContent, 2),
+          expectedOutput_2
+        );
+      });
+      it("should return empty array when input count is 0", function() {
+        let fileContent = "This is first line\n";
+        fileContent += "This is second line\n";
+        fileContent += "This is third line\n";
+        fileContent += "This is fourth line\n";
+        fileContent += "This is fifth line";
+
+        assert.deepEqual(sliceContent("\n", "tail", fileContent, 0), []);
+      });
+    });
+    describe("head", function() {
+      it("should return array of first n number of characters when input count is n", function() {
+        fileContent = "This is first\n";
+        fileContent += "This is second\n";
+        fileContent += "This is third\n";
+        fileContent += "This is fourth\n";
+        fileContent += "This is fifth";
+
+        expectedOutput_10 = "This is fi".split("");
+        expectedOutput_20 = "This is first\nT".split("");
+
+        assert.deepEqual(
+          sliceContent("", "head", fileContent, 10),
+          expectedOutput_10
+        );
+        assert.deepEqual(
+          sliceContent("", "head", fileContent, 15),
+          expectedOutput_20
+        );
+      });
+
+      it("should return empty array for empty input fileContent", function() {
+        assert.deepEqual(sliceContent("", "head", "", 1), []);
+        assert.deepEqual(sliceContent("", "head", "", 5), []);
+      });
+
+      it("should return array of first n number of lines when count is n", function() {
+        let fileContent = "This is first line\n";
+        fileContent += "This is second line\n";
+        fileContent += "This is third line n";
+        fileContent += "This is fourth line\n";
+        fileContent += "This is fifth line";
+
+        expectedOutput_1 = ["This is first line"];
+        expectedOutput_2 = ["This is first line", "This is second line"];
+
+        assert.deepEqual(
+          sliceContent("\n", "head", fileContent, 1),
+          expectedOutput_1
+        );
+        assert.deepEqual(
+          sliceContent("\n", "head", fileContent, 2),
+          expectedOutput_2
+        );
+      });
     });
   });
 });
