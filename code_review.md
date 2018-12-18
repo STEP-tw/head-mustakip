@@ -37,10 +37,10 @@ fileName: library.js
 
    type: variable name
        lineNum: 3
-       description: ‘string’
+       description: ‘string’ DONE
 
        lineNum: 29, 33
-       description: ‘isValidCount’, ‘isValidOption’
+       description: ‘isValidCount’, ‘isValidOption’ 
 
        lineNum: 81, 98
        description: ‘x’ is actually ‘filePath’ and ‘file’ is actually ‘filePaths’

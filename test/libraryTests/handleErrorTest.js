@@ -3,8 +3,8 @@ const assert = require("assert");
 const {
   findError,
   generateErrorMessage,
-  isValidCount,
-  isValidOption
+  isCountValid,
+  isOptionValid
 } = require("../../src/library/handleError.js");
 
 describe("Test for handleError.js", function() {
@@ -234,32 +234,32 @@ describe("Test for handleError.js", function() {
     });
   });
 
-  describe("isValidCount", function() {
+  describe("isCountValid", function() {
     it("should return true for input count as a nonzero positive integer", function() {
-      assert.deepEqual(isValidCount(9), true);
-      assert.deepEqual(isValidCount(1), true);
-      assert.deepEqual(isValidCount(12), true);
+      assert.deepEqual(isCountValid(9), true);
+      assert.deepEqual(isCountValid(1), true);
+      assert.deepEqual(isCountValid(12), true);
     });
     it("should return false for input count zero or negative integer", function() {
-      assert.deepEqual(isValidCount(-4), false);
-      assert.deepEqual(isValidCount(0), false);
-      assert.deepEqual(isValidCount(-1), false);
+      assert.deepEqual(isCountValid(-4), false);
+      assert.deepEqual(isCountValid(0), false);
+      assert.deepEqual(isCountValid(-1), false);
     });
     it("should return false for input count as any alphanumeric string", function() {
-      assert.deepEqual(isValidCount("obvious"), false);
-      assert.deepEqual(isValidCount("iAm1"), false);
-      assert.deepEqual(isValidCount("m"), false);
+      assert.deepEqual(isCountValid("obvious"), false);
+      assert.deepEqual(isCountValid("iAm1"), false);
+      assert.deepEqual(isCountValid("m"), false);
     });
   });
-  describe("isValidOption", function() {
+  describe("isOptionValid", function() {
     it("should return true for input option as either n or c", function() {
-      assert.deepEqual(isValidOption("c"), true);
-      assert.deepEqual(isValidOption("n"), true);
+      assert.deepEqual(isOptionValid("c"), true);
+      assert.deepEqual(isOptionValid("n"), true);
     });
     it("should return false for any input other than n and c", function() {
-      assert.deepEqual(isValidOption("nc"), false);
-      assert.deepEqual(isValidOption("1"), false);
-      assert.deepEqual(isValidOption("whyn"), false);
+      assert.deepEqual(isOptionValid("nc"), false);
+      assert.deepEqual(isOptionValid("1"), false);
+      assert.deepEqual(isOptionValid("whyn"), false);
     });
   });
 });

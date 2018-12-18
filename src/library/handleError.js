@@ -1,8 +1,8 @@
-const isValidCount = function(count) {
+const isCountValid = function(count) {
   return count > 0 && isFinite(count);
 };
 
-const isValidOption = function(option) {
+const isOptionValid = function(option) {
   return option == "n" || option == "c";
 };
 
@@ -11,11 +11,11 @@ const findError = function(args) {
   let error = "none";
   let isValid = true;
   let errorType;
-  if (!isValidOption(option)) {
+  if (!isOptionValid(option)) {
     errorType = "illegalOption";
     return generateErrorMessage(errorType, args);
   }
-  if (!isValidCount(count) && type === "head") {
+  if (!isCountValid(count) && type === "head") {
     errorType = "illegalCount";
     return generateErrorMessage(errorType, args);
   }
@@ -50,6 +50,6 @@ const generateErrorMessage = function(errorType, args) {
 module.exports = {
   findError,
   generateErrorMessage,
-  isValidCount,
-  isValidOption
+  isCountValid,
+  isOptionValid
 };

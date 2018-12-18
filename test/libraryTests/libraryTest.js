@@ -132,7 +132,7 @@ describe("Test for library.js", function() {
       });
     });
     describe("tail", function() {
-      it("should return a empty string for input count 0", function() {
+      it("should return a empty fileContent for input count 0", function() {
         let args = {
           type: "tail",
           files: ["file1"],
@@ -277,7 +277,7 @@ describe("Test for library.js", function() {
         assert.deepEqual(getChars("head", fileContent, 15), expectedOutput_20);
       });
 
-      it("should return empty array for empty input string", function() {
+      it("should return empty array for empty input fileContent", function() {
         assert.deepEqual(getChars("head", "", 1), []);
         assert.deepEqual(getChars("head", "", 5), []);
       });
@@ -320,7 +320,7 @@ describe("Test for library.js", function() {
         assert.deepEqual(getChars("tail", fileContent, 15), expectedOutput);
       });
 
-      it("should return empty array for empty input string", function() {
+      it("should return empty array for empty input fileContent", function() {
         assert.deepEqual(getChars("tail", "", 1), []);
         assert.deepEqual(getChars("tail", "", 5), []);
       });

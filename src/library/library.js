@@ -5,8 +5,8 @@ const {
   isValidCount
 } = require("../library/handleError.js");
 
-const getLines = function(type, string, count) {
-  let lines = string.split("\n");
+const getLines = function(type, fileContent, count) {
+  let lines = fileContent.split("\n");
   let linesLength = lines.length;
   if (count > linesLength) {
     count = linesLength;
@@ -18,8 +18,8 @@ const getLines = function(type, string, count) {
   return operation[type];
 };
 
-const getChars = function(type, string, count) {
-  let chars = string.split("");
+const getChars = function(type, fileContent, count) {
+  let chars = fileContent.split("");
   if (count == 0) {
     return [];
   }
