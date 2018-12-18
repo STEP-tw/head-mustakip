@@ -40,10 +40,10 @@ fileName: library.js
        description: ‘string’ DONE
 
        lineNum: 29, 33
-       description: ‘isValidCount’, ‘isValidOption’ 
+       description: ‘isValidCount’, ‘isValidOption’ DONE
 
        lineNum: 81, 98
-       description: ‘x’ is actually ‘filePath’ and ‘file’ is actually ‘filePaths’
+       description: ‘x’ is actually ‘filePath’ and ‘file’ is actually ‘filePaths’ DONE
 
        lineNum: 101
        description: 'headList' is not clear. Names like 'filteredContents' are better.

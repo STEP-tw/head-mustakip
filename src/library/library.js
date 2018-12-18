@@ -32,8 +32,8 @@ const getChars = function(type, fileContent, count) {
 
 const getHead = function(fs, args) {
   let {readFileSync, existsSync} = fs;
-  let {type, option, files, count} = args;
-  fileContents = files.map(x =>
+  let {type, option, filePaths, count} = args;
+  fileContents = filePaths.map(x =>
     existsSync(x)
       ? readFileSync(x, "UTF8")
       : type + ": " + x + ": No such file or directory"
@@ -50,7 +50,7 @@ const getHead = function(fs, args) {
   let headList = fileContents.map(file =>
     operation[option].func(type, file, count).join(delimiter)
   );
-  let fileHeaders = files.map(x => (existsSync(x) ? getHeader(x) : ""));
+  let fileHeaders = filePaths.map(x => (existsSync(x) ? getHeader(x) : ""));
   delimiter = delimiter + operation.n.delimiter;
   if (headList.length > 1) {
     headList = zip(fileHeaders, headList);

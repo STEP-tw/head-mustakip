@@ -71,7 +71,7 @@ describe("Test for library.js", function() {
       it("should return 2 lines for count 2 when one file is provided", function() {
         let args = {
           type: "head",
-          files: ["file1"],
+          filePaths: ["file1"],
           count: 2,
           option: "n"
         };
@@ -80,10 +80,10 @@ describe("Test for library.js", function() {
         assert.deepEqual(getHead(fs, args), expectedOutput);
       });
 
-      it("should return 1 line per file for count 1 when 2 input files are provided", function() {
+      it("should return 1 line per file for count 1 when 2 input filePaths are provided", function() {
         let args = {
           type: "head",
-          files: ["file1", "file2"],
+          filePaths: ["file1", "file2"],
           count: 1,
           option: "n"
         };
@@ -98,7 +98,7 @@ describe("Test for library.js", function() {
 
         let args = {
           type: "head",
-          files: ["file1"],
+          filePaths: ["file1"],
           count: "file1",
           option: "n"
         };
@@ -110,7 +110,7 @@ describe("Test for library.js", function() {
       it("should return a count error when input count is -0", function() {
         let args = {
           type: "head",
-          files: ["file1", "file2"],
+          filePaths: ["file1", "file2"],
           count: "-0",
           option: "n"
         };
@@ -122,7 +122,7 @@ describe("Test for library.js", function() {
       it("should return absentFile error if the input file name is invalid", function() {
         let args = {
           type: "head",
-          files: ["absentFile"],
+          filePaths: ["absentFile"],
           count: "5",
           option: "n"
         };
@@ -135,7 +135,7 @@ describe("Test for library.js", function() {
       it("should return a empty fileContent for input count 0", function() {
         let args = {
           type: "tail",
-          files: ["file1"],
+          filePaths: ["file1"],
           count: "0",
           option: "n"
         };
@@ -144,10 +144,10 @@ describe("Test for library.js", function() {
         assert.deepEqual(getHead(fs, args), expectedOutput);
       });
 
-      it("should return last 5 chars of 2 files when option c and count 5", function() {
+      it("should return last 5 chars of 2 filePaths when option c and count 5", function() {
         let args = {
           type: "tail",
-          files: ["file1", "file2"],
+          filePaths: ["file1", "file2"],
           count: "5",
           option: "c"
         };
@@ -159,7 +159,7 @@ describe("Test for library.js", function() {
       it("should return error for 1 file and content of the other when a invalid and a valid file is given", function() {
         let args = {
           type: "tail",
-          files: ["filex", "file2"],
+          filePaths: ["filex", "file2"],
           count: "1",
           option: "n"
         };
@@ -172,7 +172,7 @@ describe("Test for library.js", function() {
       it("should return content of 1 file and error for the other when a vaild and invalid file is given", function() {
         let args = {
           type: "tail",
-          files: ["file2", "filex"],
+          filePaths: ["file2", "filex"],
           count: "1",
           option: "n"
         };
@@ -185,7 +185,7 @@ describe("Test for library.js", function() {
       it("should return last 5 chars of file for option c and count 5", function() {
         let args = {
           type: "tail",
-          files: ["file1"],
+          filePaths: ["file1"],
           count: "5",
           option: "c"
         };
@@ -197,7 +197,7 @@ describe("Test for library.js", function() {
       it("should return last line of file when count is 1", function() {
         let args = {
           type: "tail",
-          files: ["file1"],
+          filePaths: ["file1"],
           count: "1",
           option: "n"
         };
@@ -209,7 +209,7 @@ describe("Test for library.js", function() {
       it("should return whole file when count is greater than the file size", function() {
         let args = {
           type: "tail",
-          files: ["file1"],
+          filePaths: ["file1"],
           count: "10",
           option: "n"
         };
@@ -223,7 +223,7 @@ describe("Test for library.js", function() {
       it("should return whole file when count is equal to the file size", function() {
         let args = {
           type: "tail",
-          files: ["file1"],
+          filePaths: ["file1"],
           count: "3",
           option: "n"
         };
@@ -237,7 +237,7 @@ describe("Test for library.js", function() {
       it("should return absentFile error if the input file name is invalid", function() {
         let args = {
           type: "tail",
-          files: ["absentFile"],
+          filePaths: ["absentFile"],
           count: "5",
           option: "n"
         };
@@ -249,7 +249,7 @@ describe("Test for library.js", function() {
       it("should return option error when the input option is invalid", function() {
         let args = {
           type: "tail",
-          files: ["file1"],
+          filePaths: ["file1"],
           count: "5",
           option: "z"
         };

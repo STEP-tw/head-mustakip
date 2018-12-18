@@ -15,7 +15,7 @@ describe("Test for handleError.js", function() {
           type: "head",
           option: "n",
           count: 5,
-          files: ["file1"]
+          filePaths: ["file1"]
         };
         let expectedOutput = {
           isValid: true,
@@ -30,7 +30,7 @@ describe("Test for handleError.js", function() {
           type: "head",
           option: "n",
           count: 5,
-          files: ["file1"]
+          filePaths: ["file1"]
         };
         let expectedOutput = {
           isValid: true,
@@ -45,7 +45,7 @@ describe("Test for handleError.js", function() {
           type: "head",
           option: "n",
           count: "-5",
-          files: ["file1"]
+          filePaths: ["file1"]
         };
         let expectedOutput = {
           isValid: false,
@@ -60,7 +60,7 @@ describe("Test for handleError.js", function() {
           type: "head",
           option: "n",
           count: "0",
-          files: ["file1"]
+          filePaths: ["file1"]
         };
         let expectedOutput = {
           isValid: false,
@@ -75,7 +75,7 @@ describe("Test for handleError.js", function() {
           type: "head",
           option: "n",
           count: "file1",
-          files: []
+          filePaths: []
         };
         let expectedOutput = {
           isValid: false,
@@ -91,7 +91,7 @@ describe("Test for handleError.js", function() {
           type: "tail",
           option: "n",
           count: 5,
-          files: ["file1"]
+          filePaths: ["file1"]
         };
         let expectedOutput = {
           isValid: true,
@@ -106,7 +106,7 @@ describe("Test for handleError.js", function() {
           type: "tail",
           option: "r",
           count: 5,
-          files: ["file1"]
+          filePaths: ["file1"]
         };
         let expectedOutput = {
           isValid: false,
@@ -122,7 +122,7 @@ describe("Test for handleError.js", function() {
           type: "tail",
           option: "n",
           count: "0",
-          files: ["file1"]
+          filePaths: ["file1"]
         };
         let expectedOutput = {
           isValid: true,
@@ -137,7 +137,7 @@ describe("Test for handleError.js", function() {
           type: "tail",
           option: "n",
           count: "-5",
-          files: ["file1"]
+          filePaths: ["file1"]
         };
         let expectedOutput = {
           isValid: true,
@@ -152,7 +152,7 @@ describe("Test for handleError.js", function() {
           type: "tail",
           option: "n",
           count: "file1",
-          files: ["file1"]
+          filePaths: ["file1"]
         };
         let expectedOutput = {
           isValid: false,
@@ -171,7 +171,7 @@ describe("Test for handleError.js", function() {
           type: "head",
           option: "n",
           count: "file1",
-          files: []
+          filePaths: []
         };
         let error = "illegalCount";
         let expectedOutput = {
@@ -186,7 +186,7 @@ describe("Test for handleError.js", function() {
           type: "head",
           option: "r",
           count: "file1",
-          files: []
+          filePaths: []
         };
         let error = "illegalOption";
         let expectedOutput = {
@@ -204,7 +204,7 @@ describe("Test for handleError.js", function() {
           type: "tail",
           option: "n",
           count: "file1",
-          files: []
+          filePaths: []
         };
         let error = "illegalOffset";
         let expectedOutput = {
@@ -220,7 +220,7 @@ describe("Test for handleError.js", function() {
           type: "tail",
           option: "r",
           count: "file1",
-          files: []
+          filePaths: []
         };
         let error = "illegalOption";
         let expectedOutput = {
