@@ -19,19 +19,19 @@ File : libraryTest.js
        description: using ‘head’ and ‘tail’ at lot of places in message. It could have be written in descibe block. DONE
 
        lineNum: 481 - 483
-       description: no need for testing on same type of inputs.
+       description: no need for testing on same type of inputs. DONE
 
    type: variable name
        lineNum: 270
-       description: ‘fileName’ is actually filePath.
+       description: ‘fileName’ is actually filePath. DONE 
 
    type: not generic
        line: 270, 283
-       description: readFileSync and existsSync should be generic
+       description: readFileSync and existsSync should be generic DONE
 
    type: not enough test
        line: 422
-       description: no test for default cases.
+       description: no test for default cases. DONE
 
 fileName: library.js
 
