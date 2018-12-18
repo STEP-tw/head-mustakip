@@ -34,14 +34,18 @@ const getChars = function(type, fileContent, count) {
   return operation[type];
 };
 
-const getContent = function(fs, args) {
+const read = function(fs, type, filePath) {
   let {readFileSync, existsSync} = fs;
+  if (existsSync(filePath)) {
+    return readFileSync(filePath, "UTF8");
+  }
+  return type + ": " + filePath + ": No such file or directory";
+};
+
+const getContent = function(fs, args) {
   let {type, option, filePaths, count} = args;
-  fileContents = filePaths.map(x =>
-    existsSync(x)
-      ? readFileSync(x, "UTF8")
-      : type + ": " + x + ": No such file or directory"
-  );
+  let {existsSync} = fs;
+  fileContents = filePaths.map(read.bind(null, fs, type));
   let operation = {
     n: {func: getLines, delimiter: "\n"},
     c: {func: getChars, delimiter: ""}
