@@ -42,6 +42,14 @@ const read = function(fs, type, filePath) {
   return type + ": " + filePath + ": No such file or directory";
 };
 
+const applyHeader = function(fs, filePath) {
+  let {existsSync} = fs;
+  if (existsSync(filePath)) {
+    return getHeader(filePath);
+  }
+  return "";
+};
+
 const getContent = function(fs, args) {
   let {type, option, filePaths, count} = args;
   let {existsSync} = fs;
@@ -58,7 +66,7 @@ const getContent = function(fs, args) {
   let headList = fileContents.map(file =>
     getLines(option, type, file, count).join(delimiter)
   );
-  let fileHeaders = filePaths.map(x => (existsSync(x) ? getHeader(x) : ""));
+  let fileHeaders = filePaths.map(applyHeader.bind(null, fs));
   delimiter = delimiter + operation.n.delimiter;
   if (headList.length > 1) {
     headList = zip(fileHeaders, headList);
