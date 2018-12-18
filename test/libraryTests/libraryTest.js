@@ -1,5 +1,9 @@
 const assert = require("assert");
-const {getLines, getChars, getHead} = require("../../src/library/library.js");
+const {
+  getLines,
+  getChars,
+  getContent
+} = require("../../src/library/library.js");
 
 describe("Test for library.js", function() {
   describe("getLines", function() {
@@ -44,7 +48,7 @@ describe("Test for library.js", function() {
     });
   });
 
-  describe("getHead", function() {
+  describe("getContent", function() {
     const readFileSync = function(filePath) {
       let file1 = "This is first line\n";
       file1 += "This is second line\n";
@@ -77,7 +81,7 @@ describe("Test for library.js", function() {
         };
         expectedOutput = "This is first line\nThis is second line";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return 1 line per file for count 1 when 2 input filePaths are provided", function() {
@@ -90,7 +94,7 @@ describe("Test for library.js", function() {
         expectedOutput =
           "==> file1 <==\nThis is first line\n\n==> file2 <==\nThis is fourth line";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return a count error when count is a non integer value", function() {
@@ -104,7 +108,7 @@ describe("Test for library.js", function() {
         };
         expectedOutput = "head: illegal line count -- file1";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return a count error when input count is -0", function() {
@@ -116,7 +120,7 @@ describe("Test for library.js", function() {
         };
         expectedOutput = "head: illegal line count -- -0";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return absentFile error if the input file name is invalid", function() {
@@ -128,7 +132,7 @@ describe("Test for library.js", function() {
         };
         expectedOutput = "head: absentFile: No such file or directory";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
     });
     describe("tail", function() {
@@ -141,7 +145,7 @@ describe("Test for library.js", function() {
         };
         expectedOutput = "";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return last 5 chars of 2 filePaths when option c and count 5", function() {
@@ -153,7 +157,7 @@ describe("Test for library.js", function() {
         };
         expectedOutput = "==> file1 <==\n line\n==> file2 <==\n line";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return error for 1 file and content of the other when a invalid and a valid file is given", function() {
@@ -166,7 +170,7 @@ describe("Test for library.js", function() {
         expectedOutput =
           "tail: filex: No such file or directory\n\n==> file2 <==\nThis is sixth line";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return content of 1 file and error for the other when a vaild and invalid file is given", function() {
@@ -179,7 +183,7 @@ describe("Test for library.js", function() {
         expectedOutput =
           "==> file2 <==\nThis is sixth line\n\ntail: filex: No such file or directory";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return last 5 chars of file for option c and count 5", function() {
@@ -191,7 +195,7 @@ describe("Test for library.js", function() {
         };
         expectedOutput = " line";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return last line of file when count is 1", function() {
@@ -203,7 +207,7 @@ describe("Test for library.js", function() {
         };
         expectedOutput = "This is third line";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return whole file when count is greater than the file size", function() {
@@ -217,7 +221,7 @@ describe("Test for library.js", function() {
         expectedOutput += "This is second line\n";
         expectedOutput += "This is third line";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return whole file when count is equal to the file size", function() {
@@ -231,7 +235,7 @@ describe("Test for library.js", function() {
         expectedOutput += "This is second line\n";
         expectedOutput += "This is third line";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return absentFile error if the input file name is invalid", function() {
@@ -243,7 +247,7 @@ describe("Test for library.js", function() {
         };
         expectedOutput = "tail: absentFile: No such file or directory";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
 
       it("should return option error when the input option is invalid", function() {
@@ -256,7 +260,7 @@ describe("Test for library.js", function() {
         expectedOutput =
           "tail: illegal option -- z\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]";
 
-        assert.deepEqual(getHead(fs, args), expectedOutput);
+        assert.deepEqual(getContent(fs, args), expectedOutput);
       });
     });
   });

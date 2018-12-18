@@ -30,7 +30,7 @@ const getChars = function(type, fileContent, count) {
   return operation[type];
 };
 
-const getHead = function(fs, args) {
+const getContent = function(fs, args) {
   let {readFileSync, existsSync} = fs;
   let {type, option, filePaths, count} = args;
   fileContents = filePaths.map(x =>
@@ -64,5 +64,5 @@ module.exports = {
   isValidCount,
   generateErrorMessage,
   findError,
-  getHead
+  getContent
 };
