@@ -9,12 +9,12 @@ const delimiters = {
   n: "\n",
   c: ""
 };
-const getHead = function(option, fileContent, count) {
+const getHead = function(fileContent, option, count) {
   let delimiter = delimiters[option];
   return sliceContent(delimiter, "head", fileContent, count);
 };
 
-const getTail = function(option, fileContent, count) {
+const getTail = function(fileContent, option, count) {
   let delimiter = delimiters[option];
   return sliceContent(delimiter, "tail", fileContent, count);
 };
@@ -61,7 +61,7 @@ const getContent = function(fs, args) {
   }
   let delimiter = delimiters[option];
   let headList = fileContents.map(fileContent =>
-    operations[type](option, fileContent, count).join(delimiter)
+    operations[type](fileContent, option, count).join(delimiter)
   );
   let fileHeaders = filePaths.map(applyHeader.bind(null, fs));
   delimiter = delimiter + delimiters["n"];

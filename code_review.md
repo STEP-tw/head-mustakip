@@ -56,19 +56,19 @@ fileName: library.js
 
    type: duplication
        lineNum: -
-       description: getLines and getChars are same except delimiter. 
+       description: getLines and getChars are same except delimiter. DONE
 
    type: logicError
        lineNum: 91
-       description: no need to compare with ‘false’.
+       description: no need to compare with ‘false’. DONE
 
-   type: readability
+   type: readability 
        lineNum: 82, 98
-       description: use of ‘if’ is better than using ‘ternary operator’
+       description: use of ‘if’ is better than using ‘ternary operator’ DONE
 
    type: params order
        lineNum: 3, 16
-       description: it’s better to use ‘string’ as a first parameter.
+       description: it’s better to use ‘string’ as a first parameter. 
 
        lineNum: 78
        description: it’s better to use ‘fs’ as second params.
