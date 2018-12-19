@@ -37,7 +37,7 @@ const read = function(fs, type, filePath) {
     let fileContent = readFileSync(filePath, "UTF8");
     return {fileContent, error: ""};
   }
-  let error = type + ": " + filePath + ": No such file or directory";
+  let error = `${type}: ${filePath}: No such file or directory`;
   return {fileContent: "", error};
 };
 

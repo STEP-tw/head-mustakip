@@ -37,10 +37,9 @@ const generateErrorMessage = function(errorType, args) {
     tail: "usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
   };
   let errors = {
-    illegalCount:
-      type + ": illegal " + countType[option] + " count -- " + count,
-    illegalOffset: type + ": illegal offset -- " + count,
-    illegalOption: type + ": illegal option -- " + option + "\n" + usage[type]
+    illegalCount: `${type}: illegal ${countType[option]} count -- ${count}`,
+    illegalOffset: `${type}: illegal offset -- ${count}`,
+    illegalOption: `${type}: illegal option -- ${option}\n${usage[type]}`
   };
   let error = errors[errorType];
   let isValid = false;
