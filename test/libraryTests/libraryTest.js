@@ -416,8 +416,8 @@ describe("sliceContent", function() {
     });
 
     it("should return empty array for empty input fileContent", function() {
-      assert.deepEqual(sliceContent("\n", "tail", "", 1), [""]);
-      assert.deepEqual(sliceContent("\n", "tail", "", 5), [""]);
+      assert.deepEqual(sliceContent("\n", "tail", "", 1), []);
+      assert.deepEqual(sliceContent("\n", "tail", "", 5), []);
     });
     it("should return array of last n number of lines when count is n", function() {
       let fileContent = "This is first line\n";
