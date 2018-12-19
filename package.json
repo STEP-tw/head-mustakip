@@ -1,0 +1,22 @@
+{
+  "name": "head",
+  "version": "0.0.1",
+  "description": "run head command",
+  "main": "head.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEP-tw/head-mustakip.git"
+  },
+  "author": "musta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STEP-tw/head-mustakip/issues"
+  },
+  "homepage": "https://github.com/STEP-tw/head-mustakip#readme"
+}

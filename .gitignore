@@ -1,3 +1,4 @@
 *.sw?
 .nyc_*
 coverage/*
+node_modules
