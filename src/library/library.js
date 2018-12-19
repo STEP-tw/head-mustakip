@@ -20,7 +20,10 @@ const getTail = function(fileContent, option, count) {
 };
 
 const sliceContent = function(delimiter, type, fileContent, count) {
-  let data = fileContent.split(delimiter).filter(x => x != "");
+  let data = fileContent.split(delimiter);
+  if (data[data.length - 1] == "") {
+    data.pop();
+  }
   if (count == 0) {
     return [];
   }
