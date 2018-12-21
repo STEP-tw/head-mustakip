@@ -68,7 +68,7 @@ fileName: library.js
 
    type: params order
        lineNum: 3, 16
-       description: it’s better to use ‘string’ as a first parameter. 
+       description: it’s better to use ‘string’ as a first parameter. DONE 
 
        lineNum: 78
        description: it’s better to use ‘fs’ as second params.
@@ -76,7 +76,7 @@ fileName: library.js
    fileName: parsindInput.js
 
        type: fileName
-       description: ‘parseInput’ is better than continuous form.
+       description: ‘parseInput’ is better than continuous form. DONE
 
        type: long function
        lineNum: 3
