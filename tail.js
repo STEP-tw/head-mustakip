@@ -1,5 +1,5 @@
 const fs = require("fs");
-const {tail} = require("./src/library/library");
+const {tail} = require("./src/library/library.js");
 const {parseInput} = require("./src/library/parseInput.js");
 
 const main = function() {
