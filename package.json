@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/STEP-tw/head-mustakip/issues"
   },
-  "homepage": "https://github.com/STEP-tw/head-mustakip#readme"
+  "homepage": "https://github.com/STEP-tw/head-mustakip#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
 }
