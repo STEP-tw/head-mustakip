@@ -1,4 +1,4 @@
-const {getHeader, zip} = require("../util/util.js");
+const {zip} = require("../util/util.js");
 const {
   generateErrorMessage,
   findError,
@@ -51,6 +51,15 @@ const applyHeader = function(fs, filePath) {
   }
   return "";
 };
+const head = function(fs, args) {
+  args.type = "head";
+  return getContent(fs, args);
+};
+
+const tail = function(fs, args) {
+  args.type = "tail";
+  return getContent(fs, args);
+};
 
 const getContent = function(fs, args) {
   let {type, option, filePaths, count} = args;
@@ -79,6 +88,8 @@ const getContent = function(fs, args) {
 };
 
 module.exports = {
+  head,
+  tail,
   sliceContent,
   getHead,
   getTail,
