@@ -1,9 +1,6 @@
 const {doesIncludeNumber} = require("../util/util.js");
 
-const parseInput = function(userInputs) {
-  let length = userInputs[1].length;
-  let type = userInputs[1].slice(length - 7, length - 3);
-  argsList = userInputs.slice(2);
+const parseInput = function(argsList) {
   let option = "n";
   if (argsList[0].startsWith("-")) {
     option = argsList[0].slice(1, 2);
@@ -27,7 +24,7 @@ const parseInput = function(userInputs) {
     count = argsList[1];
     filePaths = argsList.slice(2);
   }
-  return {type, option, count, filePaths};
+  return {option, count, filePaths};
 };
 
 module.exports = {parseInput};
