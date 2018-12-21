@@ -91,6 +91,29 @@ describe("getContent", function() {
       assert.deepEqual(getContent(fs, args), expectedOutput);
     });
 
+    it("should return first 5 charachters of one file when input count is 5", function() {
+      let args = {
+        type: "head",
+        filePaths: ["file1"],
+        count: 5,
+        option: "c"
+      };
+      expectedOutput = "This ";
+
+      assert.deepEqual(getContent(fs, args), expectedOutput);
+    });
+    it("should return first 5 charachters of each file for 2 files when input count is 5", function() {
+      let args = {
+        type: "head",
+        filePaths: ["file1", "file2"],
+        count: 5,
+        option: "c"
+      };
+      expectedOutput = "==> file1 <==\nThis \n==> file2 <==\nThis ";
+
+      assert.deepEqual(getContent(fs, args), expectedOutput);
+    });
+
     it("should return a count error when count is a non integer value", function() {
       let fileContent = "identity";
 
