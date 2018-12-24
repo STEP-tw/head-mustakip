@@ -6,9 +6,10 @@ const {
 } = require("../library/handleError.js");
 
 const delimiters = {
-  n: "\n",
-  c: ""
+  line: "\n",
+  byte: ""
 };
+
 const getHead = function(fileContent, option, count) {
   let delimiter = delimiters[option];
   return sliceContent(delimiter, "head", fileContent, count);
@@ -80,7 +81,7 @@ const getContent = function(fs, args) {
     operations[type](fileContent, option, count).join(delimiter)
   );
   let fileHeaders = filePaths.map(applyHeader.bind(null, fs));
-  delimiter = delimiter + delimiters["n"];
+  delimiter = delimiter + delimiters["line"];
   if (headList.length > 1) {
     headList = zip(fileHeaders, headList);
   }

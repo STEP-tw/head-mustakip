@@ -40,13 +40,13 @@ describe("getHead", function() {
     expectedOutput_10 = "This is fi".split("");
     expectedOutput_20 = "This is first\nT".split("");
 
-    assert.deepEqual(getHead(fileContent, "c", 10), expectedOutput_10);
-    assert.deepEqual(getHead(fileContent, "c", 15), expectedOutput_20);
+    assert.deepEqual(getHead(fileContent, "byte", 10), expectedOutput_10);
+    assert.deepEqual(getHead(fileContent, "byte", 15), expectedOutput_20);
   });
 
   it("should return empty array for empty input fileContent", function() {
-    assert.deepEqual(getHead("", "c", 1), []);
-    assert.deepEqual(getHead("", "c", 5), []);
+    assert.deepEqual(getHead("", "byte", 1), []);
+    assert.deepEqual(getHead("", "byte", 5), []);
   });
 
   it("should return array of first n number of lines when count is n", function() {
@@ -59,8 +59,8 @@ describe("getHead", function() {
     expectedOutput_1 = ["This is first line"];
     expectedOutput_2 = ["This is first line", "This is second line"];
 
-    assert.deepEqual(getHead(fileContent, "n", 1), expectedOutput_1);
-    assert.deepEqual(getHead(fileContent, "n", 2), expectedOutput_2);
+    assert.deepEqual(getHead(fileContent, "line", 1), expectedOutput_1);
+    assert.deepEqual(getHead(fileContent, "line", 2), expectedOutput_2);
   });
 });
 
@@ -71,7 +71,7 @@ describe("getContent", function() {
         type: "head",
         filePaths: ["file1"],
         count: 2,
-        option: "n"
+        option: "line"
       };
       expectedOutput = "This is first line\nThis is second line";
 
@@ -83,7 +83,7 @@ describe("getContent", function() {
         type: "head",
         filePaths: ["file1", "file2"],
         count: 1,
-        option: "n"
+        option: "line"
       };
       expectedOutput =
         "==> file1 <==\nThis is first line\n\n==> file2 <==\nThis is fourth line";
@@ -96,7 +96,7 @@ describe("getContent", function() {
         type: "head",
         filePaths: ["file1"],
         count: 5,
-        option: "c"
+        option: "byte"
       };
       expectedOutput = "This ";
 
@@ -107,7 +107,7 @@ describe("getContent", function() {
         type: "head",
         filePaths: ["file1", "file2"],
         count: 5,
-        option: "c"
+        option: "byte"
       };
       expectedOutput = "==> file1 <==\nThis \n==> file2 <==\nThis ";
 
@@ -121,7 +121,7 @@ describe("getContent", function() {
         type: "head",
         filePaths: ["file1"],
         count: "file1",
-        option: "n"
+        option: "line"
       };
       expectedOutput = "head: illegal line count -- file1";
 
@@ -133,7 +133,7 @@ describe("getContent", function() {
         type: "head",
         filePaths: ["file1", "file2"],
         count: "-0",
-        option: "n"
+        option: "line"
       };
       expectedOutput = "head: illegal line count -- -0";
 
@@ -145,7 +145,7 @@ describe("getContent", function() {
         type: "head",
         filePaths: ["absentFile"],
         count: "5",
-        option: "n"
+        option: "line"
       };
       expectedOutput = "head: absentFile: No such file or directory";
 
@@ -158,7 +158,7 @@ describe("getContent", function() {
         type: "tail",
         filePaths: ["file1"],
         count: "0",
-        option: "n"
+        option: "line"
       };
       expectedOutput = "";
 
@@ -170,7 +170,7 @@ describe("getContent", function() {
         type: "tail",
         filePaths: ["file1", "file2"],
         count: "5",
-        option: "c"
+        option: "byte"
       };
       expectedOutput = "==> file1 <==\n line\n==> file2 <==\n line";
 
@@ -182,7 +182,7 @@ describe("getContent", function() {
         type: "tail",
         filePaths: ["filex", "file2"],
         count: "1",
-        option: "n"
+        option: "line"
       };
       expectedOutput =
         "tail: filex: No such file or directory\n\n==> file2 <==\nThis is sixth line";
@@ -195,7 +195,7 @@ describe("getContent", function() {
         type: "tail",
         filePaths: ["file2", "filex"],
         count: "1",
-        option: "n"
+        option: "line"
       };
       expectedOutput =
         "==> file2 <==\nThis is sixth line\n\ntail: filex: No such file or directory";
@@ -208,7 +208,7 @@ describe("getContent", function() {
         type: "tail",
         filePaths: ["file1"],
         count: "5",
-        option: "c"
+        option: "byte"
       };
       expectedOutput = " line";
 
@@ -220,7 +220,7 @@ describe("getContent", function() {
         type: "tail",
         filePaths: ["file1"],
         count: "1",
-        option: "n"
+        option: "line"
       };
       expectedOutput = "This is third line";
 
@@ -232,7 +232,7 @@ describe("getContent", function() {
         type: "tail",
         filePaths: ["file1"],
         count: "10",
-        option: "n"
+        option: "line"
       };
       expectedOutput = "This is first line\n";
       expectedOutput += "This is second line\n";
@@ -246,7 +246,7 @@ describe("getContent", function() {
         type: "tail",
         filePaths: ["file1"],
         count: "3",
-        option: "n"
+        option: "line"
       };
       expectedOutput = "This is first line\n";
       expectedOutput += "This is second line\n";
@@ -260,7 +260,7 @@ describe("getContent", function() {
         type: "tail",
         filePaths: ["absentFile"],
         count: "5",
-        option: "n"
+        option: "line"
       };
       expectedOutput = "tail: absentFile: No such file or directory";
 
@@ -288,7 +288,7 @@ describe("getTail", function() {
     fileContent += "lol";
 
     let expectedOutput = fileContent.split("");
-    assert.deepEqual(getTail(fileContent, "c", 15), expectedOutput);
+    assert.deepEqual(getTail(fileContent, "byte", 15), expectedOutput);
   });
   it("should return array of last n number of characters when input count is n", function() {
     fileContent = "This is first\n";
@@ -300,15 +300,15 @@ describe("getTail", function() {
     expectedOutput_10 = "s is fifth".split("");
     expectedOutput_20 = "h\nThis is fifth".split("");
 
-    assert.deepEqual(getTail(fileContent, "c", 10), expectedOutput_10);
-    assert.deepEqual(getTail(fileContent, "c", 15), expectedOutput_20);
+    assert.deepEqual(getTail(fileContent, "byte", 10), expectedOutput_10);
+    assert.deepEqual(getTail(fileContent, "byte", 15), expectedOutput_20);
   });
 
   it("should return empty array when input count is 0", function() {
     fileContent = "This is first\n";
     fileContent += "This is second\n";
 
-    assert.deepEqual(getTail(fileContent, "c", 0), []);
+    assert.deepEqual(getTail(fileContent, "byte", 0), []);
   });
 
   it("should return whole file content if count is greater than the chars in file", function() {
@@ -316,12 +316,12 @@ describe("getTail", function() {
     fileContent += "lol";
 
     let expectedOutput = fileContent.split("");
-    assert.deepEqual(getTail(fileContent, "c", 15), expectedOutput);
+    assert.deepEqual(getTail(fileContent, "byte", 15), expectedOutput);
   });
 
   it("should return empty array for empty input fileContent", function() {
-    assert.deepEqual(getTail("", "c", 1), []);
-    assert.deepEqual(getTail("", "c", 5), []);
+    assert.deepEqual(getTail("", "byte", 1), []);
+    assert.deepEqual(getTail("", "byte", 5), []);
   });
   it("should return array of last n number of lines when count is n", function() {
     let fileContent = "This is first line\n";
@@ -333,8 +333,8 @@ describe("getTail", function() {
     expectedOutput_1 = ["This is fifth line"];
     expectedOutput_2 = ["This is fourth line", "This is fifth line"];
 
-    assert.deepEqual(getTail(fileContent, "n", 1), expectedOutput_1);
-    assert.deepEqual(getTail(fileContent, "n", 2), expectedOutput_2);
+    assert.deepEqual(getTail(fileContent, "line", 1), expectedOutput_1);
+    assert.deepEqual(getTail(fileContent, "line", 2), expectedOutput_2);
   });
   it("should return empty array when input count is 0", function() {
     let fileContent = "This is first line\n";
@@ -343,7 +343,7 @@ describe("getTail", function() {
     fileContent += "This is fourth line\n";
     fileContent += "This is fifth line";
 
-    assert.deepEqual(getTail(fileContent, "n", 0), []);
+    assert.deepEqual(getTail(fileContent, "line", 0), []);
   });
 });
 describe("read", function() {

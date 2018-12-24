@@ -1,0 +1,5 @@
+TODO -->
+
+1. make two different funcitons for tail and head t be called in their respective mains.
+2. write more test cases for getContent function for head case.
+3. change the option from n to lines and c to bytes.

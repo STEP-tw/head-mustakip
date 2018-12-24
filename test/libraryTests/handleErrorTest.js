@@ -12,7 +12,7 @@ describe("findError", function() {
     it("should return an object with isValid true and error none for valid input count", function() {
       let args = {
         type: "head",
-        option: "n",
+        option: "line",
         count: 5,
         filePaths: ["file1"]
       };
@@ -27,7 +27,7 @@ describe("findError", function() {
     it("should return an object with isValid true and error none for valid input file name", function() {
       let args = {
         type: "head",
-        option: "n",
+        option: "line",
         count: 5,
         filePaths: ["file1"]
       };
@@ -42,7 +42,7 @@ describe("findError", function() {
     it("should return an object with isValid false and error for -5 as count", function() {
       let args = {
         type: "head",
-        option: "n",
+        option: "line",
         count: "-5",
         filePaths: ["file1"]
       };
@@ -57,7 +57,7 @@ describe("findError", function() {
     it("should return an object with isValid false and error for 0 as count", function() {
       let args = {
         type: "head",
-        option: "n",
+        option: "line",
         count: "0",
         filePaths: ["file1"]
       };
@@ -72,7 +72,7 @@ describe("findError", function() {
     it("should return an object with isValid false and error for file name as count", function() {
       let args = {
         type: "head",
-        option: "n",
+        option: "line",
         count: "file1",
         filePaths: []
       };
@@ -88,7 +88,7 @@ describe("findError", function() {
     it("should return error none for valid input count", function() {
       let args = {
         type: "tail",
-        option: "n",
+        option: "line",
         count: 5,
         filePaths: ["file1"]
       };
@@ -119,7 +119,7 @@ describe("findError", function() {
     it("should return an object with isValid true and error none for 0 as count", function() {
       let args = {
         type: "tail",
-        option: "n",
+        option: "line",
         count: "0",
         filePaths: ["file1"]
       };
@@ -134,7 +134,7 @@ describe("findError", function() {
     it("should return an object with isValid true and error none for -5 as count", function() {
       let args = {
         type: "tail",
-        option: "n",
+        option: "line",
         count: "-5",
         filePaths: ["file1"]
       };
@@ -149,7 +149,7 @@ describe("findError", function() {
     it("should return an object with isValid false and error for file name as count", function() {
       let args = {
         type: "tail",
-        option: "n",
+        option: "line",
         count: "file1",
         filePaths: ["file1"]
       };
@@ -168,7 +168,7 @@ describe("generateErrorMessage", function() {
     it("should return an object with isValid false and illegal count error for file name", function() {
       let args = {
         type: "head",
-        option: "n",
+        option: "line",
         count: "file1",
         filePaths: []
       };
@@ -201,7 +201,7 @@ describe("generateErrorMessage", function() {
     it("should return an object with isValid false and illegal offset error for file name", function() {
       let args = {
         type: "tail",
-        option: "n",
+        option: "line",
         count: "file1",
         filePaths: []
       };
@@ -252,8 +252,8 @@ describe("isCountValid", function() {
 });
 describe("isOptionValid", function() {
   it("should return true for input option as either n or c", function() {
-    assert.deepEqual(isOptionValid("c"), true);
-    assert.deepEqual(isOptionValid("n"), true);
+    assert.deepEqual(isOptionValid("byte"), true);
+    assert.deepEqual(isOptionValid("line"), true);
   });
   it("should return false for any input other than n and c", function() {
     assert.deepEqual(isOptionValid("nc"), false);

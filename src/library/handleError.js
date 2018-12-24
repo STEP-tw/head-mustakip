@@ -3,7 +3,7 @@ const isCountValid = function(count) {
 };
 
 const isOptionValid = function(option) {
-  return option == "n" || option == "c";
+  return option == "line" || option == "byte";
 };
 
 const findError = function(args) {
@@ -28,16 +28,12 @@ const findError = function(args) {
 
 const generateErrorMessage = function(errorType, args) {
   let {type, option, count} = args;
-  let countType = {
-    n: "line",
-    c: "byte"
-  };
   let usage = {
     head: "usage: head [-n lines | -c bytes] [file ...]",
     tail: "usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
   };
   let errors = {
-    illegalCount: `${type}: illegal ${countType[option]} count -- ${count}`,
+    illegalCount: `${type}: illegal ${option} count -- ${count}`,
     illegalOffset: `${type}: illegal offset -- ${count}`,
     illegalOption: `${type}: illegal option -- ${option}\n${usage[type]}`
   };

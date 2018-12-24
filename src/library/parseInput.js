@@ -24,7 +24,16 @@ const parseInput = function(argsList) {
     count = argsList[1];
     filePaths = argsList.slice(2);
   }
+  option = linesOrBytes(option) || option;
   return {option, count, filePaths};
+};
+
+const linesOrBytes = function(option) {
+  let representation = {
+    n: "line",
+    c: "byte"
+  };
+  return representation[option];
 };
 
 module.exports = {parseInput};
